@@ -14,25 +14,24 @@ type QueryParams = {
 export default function Catalog() {
 
     const [isLastPage, setIsLastPage] = useState(false);
-
-    const [itemlosts, setItemlosts] = useState<ItemLostDTO[]>([]); // Alterado
-
+    const [itemlosts, setItemlosts] = useState<ItemLostDTO[]>([]);
     const [queryParams, setQueryParam] = useState<QueryParams>({
         page: 0,
         name: ""
     });
 
     useEffect(() => {
-        ItemLostService.findPageRequest(queryParams.page) // Alterado
+        ItemLostService.findPageRequest(queryParams.page, queryParams.name)
             .then(response => {
-                const nextPage = response.data.content;
-                setItemlosts(itemlosts.concat(nextPage)); // Alterado
+                // CORREÇÃO AQUI: Filtramos a resposta para manter apenas itens com status = true
+                const newItems = response.data.content.filter((item: ItemLostDTO) => item.status === true);
+
+                setItemlosts(prevItems => [...prevItems, ...newItems]);
                 setIsLastPage(response.data.last);
             });
     }, [queryParams]);
 
     function handleSearch(searchText: string) {
-        // A pesquisa agora apenas limpa a lista para uma nova busca paginada
         setItemlosts([]);
         setQueryParam({ ...queryParams, page: 0, name: searchText });
     }
@@ -49,7 +48,7 @@ export default function Catalog() {
                 <div className="dsc-catalog-cards dsc-mb20 dsc-mt20">
                     {
                         itemlosts.map(
-                            item => <CatalogCard key={item.id} itemlost={item} /> // Alterado
+                            item => <CatalogCard key={item.id} itemlost={item} />
                         )
                     }
                 </div>
