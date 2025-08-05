@@ -5,6 +5,8 @@ type Props = {
     id: number;
     message: string;
     onDialogAnswer: Function;
+
+    
 }
 
 export default function DialogConfirmation({ id, message, onDialogAnswer }: Props) {
