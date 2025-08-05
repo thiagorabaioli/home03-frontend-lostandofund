@@ -50,7 +50,7 @@ export default function Login() {
             .then(response => {
                 authService.saveAccessToken(response.data.access_token);
                 setContextTokenPayload(authService.getAccessTokenPayload());
-                navigate("/cart");
+                navigate("/");
             })
             .catch(() => {
                 setSubmitResponseFail(true);

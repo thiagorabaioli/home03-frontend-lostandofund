@@ -3,17 +3,20 @@ import ButtonInverse from "../../../components/ButtonInverse";
 import ItemLostDetailsCard from "../../../components/ItemLostDetailsCard";
 import { useNavigate, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ItemLostDTO } from '../../../models/itemlosts';
 import * as itemlostService from '../../../services/itemlost-service';
+import { ContextToken } from '../../../utils/context-token';
+import * as authService from '../../../services/auth-service';
 
 export default function ItemLostDetails() {
   const params = useParams();
   const navigate = useNavigate();
   const [itemlost, setItemlost] = useState<ItemLostDTO>();
 
+  const { contextTokenPayload } = useContext(ContextToken);
+
   useEffect(() => {
-    // AQUI ESTÁ A CORREÇÃO: Usar 'itemlostId' que foi definido na rota
     itemlostService.findById(Number(params.itemlostId))
       .then(response => {
         setItemlost(response.data);
@@ -23,9 +26,8 @@ export default function ItemLostDetails() {
       });
   }, [params.itemlostId]);
 
-
-  function handleClaimItem() {
-    navigate("/cart"); // Simplificado para ir para o carrinho/lista
+  function handleDeliverClick() {
+    navigate(`/admin/itemlosts/${params.itemlostId}/deliver`);
   }
 
   return (
@@ -36,9 +38,12 @@ export default function ItemLostDetails() {
           <ItemLostDetailsCard itemlost={itemlost} />
         }
         <div className="dsc-btn-page-container">
-          <div onClick={handleClaimItem}>
-            <div className="dsc-btn dsc-btn-blue">Reclamar item</div>
-          </div>
+          {
+            contextTokenPayload && authService.hasAnyRoles(['ROLE_ADMIN', 'ROLE_VIGILANTE']) && itemlost?.status &&
+            <div onClick={handleDeliverClick}>
+              <div className="dsc-btn dsc-btn-blue">Entregar item</div>
+            </div>
+          }
           <Link to="/">
             <ButtonInverse text="Início" />
           </Link>
