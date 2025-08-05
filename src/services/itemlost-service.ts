@@ -3,14 +3,13 @@ import { ItemLostDTO } from "../models/itemlosts";
 import { requestBackend } from "../utils/requests";
 import { BASE_URL } from "../utils/system";
 
-export function findPageRequest(page: number, name: string, size = 12, sort = "description") {
+export function findPageRequest(page: number, size = 12, sort = "description") {
     const config : AxiosRequestConfig = {
         method: "GET",
         url: "/itemlosts",
           withCredentials: true, // Adicione esta linha
         params: {
             page,
-            name,
             size,
             sort 
         }

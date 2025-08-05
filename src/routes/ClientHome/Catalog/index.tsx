@@ -23,7 +23,7 @@ export default function Catalog() {
     });
 
     useEffect(() => {
-        ItemLostService.findPageRequest(queryParams.page, queryParams.name) // Alterado
+        ItemLostService.findPageRequest(queryParams.page) // Alterado
             .then(response => {
                 const nextPage = response.data.content;
                 setItemlosts(itemlosts.concat(nextPage)); // Alterado
@@ -31,8 +31,9 @@ export default function Catalog() {
             });
     }, [queryParams]);
 
-   function handleSearch(searchText: string) {
-        setItemlosts([]); // Alterado
+    function handleSearch(searchText: string) {
+        // A pesquisa agora apenas limpa a lista para uma nova busca paginada
+        setItemlosts([]);
         setQueryParam({ ...queryParams, page: 0, name: searchText });
     }
 
