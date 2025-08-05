@@ -22,6 +22,7 @@ import DeliverForm from './routes/Admin/DeliveryForm'; // Adicione esta importa√
 
 
 
+
 export default function App() {
 
   const [contextCartCount, setContextCartCount] = useState<number>(0);
@@ -50,12 +51,12 @@ export default function App() {
               <Route path="login" element={<Login />} />
               <Route path="confirmation/:orderId" element={<PrivateRoute><Confirmation /></PrivateRoute>} />
             </Route>
-            <Route path="/admin/" element={<PrivateRoute roles={['ROLE_ADMIN']}><Admin /></PrivateRoute>}>
+              <Route path="/admin/" element={<PrivateRoute roles={['ROLE_ADMIN', 'ROLE_VIGILANTE']}><Admin /></PrivateRoute>}>
               <Route index element={<Navigate to="/admin/home" />} />
               <Route path="home" element={<AdminHome />} />
               <Route path="itemlosts" element={<ItemlostListing />} />
               <Route path="itemlosts/:itemlostId" element={<ItemLostForm />} />
-              <Route path="itemlosts/:itemlostId/deliver" element={<DeliverForm />} /> {/* ROTA ADICIONADA AQUI */}
+              <Route path="itemlosts/:itemlostId/deliver" element={<DeliverForm />} />
             </Route>
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
