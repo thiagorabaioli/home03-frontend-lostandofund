@@ -1,6 +1,5 @@
-import { OrderItemDTO } from "./orderitem";
-
-
+// Importando do lugar certo
+import { OrderItemDTO } from "./order";
 
 export type ItemLostDTO = {
     id: number;
@@ -10,5 +9,5 @@ export type ItemLostDTO = {
     description: string;
     foundDate: string;
     imgUrl: string;
-    orderItems: OrderItemDTO[];
+    orderItems: OrderItemDTO[]; // Usando o DTO correto
 }

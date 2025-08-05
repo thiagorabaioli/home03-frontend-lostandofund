@@ -4,7 +4,7 @@ import { requestBackend } from "../utils/requests";
 export function findAllRequest() {
     const config : AxiosRequestConfig = {
         method: "GET",
-        url: "/categories"
+        url: "/itemlosts"
     }
 
     return requestBackend(config);

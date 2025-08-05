@@ -1,4 +1,4 @@
-import { OrderDTO, OrderItemDTO2 } from "../models/order";
+import { OrderDTO, OrderItemDTO } from "../models/order";
 import { CART_KEY } from "../utils/system";
 
 export function save(cart: OrderDTO) {
@@ -12,7 +12,7 @@ export function get() : OrderDTO {
 
     const cart = new OrderDTO();
     obj.items.forEach(x => {
-        cart.items.push(new OrderItemDTO2(x.itemlostId, x.description, x.imgUrl));
+        cart.items.push(new OrderItemDTO(x.itemlostId, x.description, x.imgUrl));
     });
 
     return cart;
