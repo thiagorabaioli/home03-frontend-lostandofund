@@ -1,23 +1,23 @@
 import './styles.css';
-import { ProductDTO } from '../../models/itemlosts';
+import { ItemLostDTO } from '../../models/itemlosts';
 import { Link } from 'react-router-dom';
 
 type Props = {
-    product: ProductDTO;
+    itemlost: ItemLostDTO; // Alterado
 }
 
-export default function CatalogCard({ product }: Props) {
+export default function CatalogCard({ itemlost }: Props) { // Alterado
 
     return (
-        <Link to={`/product-details/${product.id}`}>
+        <Link to={`/itemlost-details/${itemlost.id}`}> {/* Alterado */}
             <div className="dsc-card">
                 <div className="dsc-catalog-card-top dsc-line-bottom">
-                    <img src={product.imgUrl} alt={product.name} />
+                    <img src={itemlost.imgUrl} alt={itemlost.description} /> {/* Alterado */}
                 </div>
                 <div className="dsc-catalog-card-bottom">
-                    <h3>R$ {product.price.toFixed(2)}</h3>
+                    <h3>{itemlost.description}</h3> {/* Alterado */}
                     <h4>
-                        {product.name}
+                        Encontrado em: {itemlost.location} {/* Alterado */}
                     </h4>
                 </div>
             </div>

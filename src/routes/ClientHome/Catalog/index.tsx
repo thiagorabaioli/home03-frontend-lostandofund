@@ -2,9 +2,9 @@ import './styles.css';
 import SearchBar from '../../../components/SearchBar';
 import CatalogCard from '../../../components/CatalogCard';
 import ButtonNextPage from '../../../components/ButtonNextPage';
-import * as productService from '../../../services/itemlost-service';
+import * as ItemLostService from '../../../services/itemlost-service';
 import { useEffect, useState } from 'react';
-import { ProductDTO } from '../../../models/itemlosts';
+import { ItemLostDTO } from '../../../models/itemlosts';
 
 type QueryParams = {
     page: number;
@@ -15,7 +15,7 @@ export default function Catalog() {
 
     const [isLastPage, setIsLastPage] = useState(false);
 
-    const [products, setProducts] = useState<ProductDTO[]>([]);
+    const [itemlosts, setItemlosts] = useState<ItemLostDTO[]>([]); // Alterado
 
     const [queryParams, setQueryParam] = useState<QueryParams>({
         page: 0,
@@ -23,16 +23,16 @@ export default function Catalog() {
     });
 
     useEffect(() => {
-        productService.findPageRequest(queryParams.page, queryParams.name)
+        ItemLostService.findPageRequest(queryParams.page, queryParams.name) // Alterado
             .then(response => {
                 const nextPage = response.data.content;
-                setProducts(products.concat(nextPage));
+                setItemlosts(itemlosts.concat(nextPage)); // Alterado
                 setIsLastPage(response.data.last);
             });
     }, [queryParams]);
 
-    function handleSearch(searchText: string) {
-        setProducts([]);
+   function handleSearch(searchText: string) {
+        setItemlosts([]); // Alterado
         setQueryParam({ ...queryParams, page: 0, name: searchText });
     }
 
@@ -47,8 +47,8 @@ export default function Catalog() {
 
                 <div className="dsc-catalog-cards dsc-mb20 dsc-mt20">
                     {
-                        products.map(
-                            product => <CatalogCard key={product.id} product={product} />
+                        itemlosts.map(
+                            item => <CatalogCard key={item.id} itemlost={item} /> // Alterado
                         )
                     }
                 </div>
