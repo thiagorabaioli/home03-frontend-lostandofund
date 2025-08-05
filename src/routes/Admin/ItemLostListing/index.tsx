@@ -89,12 +89,10 @@ export default function ItemlostListing() {
         setDialogConfirmationData({ ...dialogConfirmationData, visible: false });
     }
 
-    // CORREÇÃO: Esta função agora navega para a nova página
+    // CORREÇÃO AQUI: Esta função agora navega para a página do formulário de entrega
     function handleDeliverClick(itemlostId: number) {
         navigate(`/admin/itemlosts/${itemlostId}/deliver`);
     }
-
-  
 
     return (
         <main>
