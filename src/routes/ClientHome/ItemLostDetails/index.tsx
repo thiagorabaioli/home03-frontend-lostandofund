@@ -8,21 +8,21 @@ import { ItemLostDTO } from '../../../models/itemlosts';
 import * as itemlostService from '../../../services/itemlost-service';
 
 export default function ItemLostDetails() {
-
   const params = useParams();
   const navigate = useNavigate();
   const [itemlost, setItemlost] = useState<ItemLostDTO>();
 
   useEffect(() => {
-    // AQUI ESTÁ A CORREÇÃO PRINCIPAL: Usar 'itemlostId' em vez de 'productId'
-    itemlostService.findById(Number(params.itemlostId))
+    // CORREÇÃO AQUI: Usar 'id'
+    itemlostService.findById(Number(params.id))
       .then(response => {
         setItemlost(response.data);
       })
       .catch(() => {
         navigate("/");
       });
-  }, [params.itemlostId]); // Adicionar dependência para recarregar se o ID mudar
+  }, [params.id]);
+
 
   function handleClaimItem() {
     // Futura lógica para reclamar o item

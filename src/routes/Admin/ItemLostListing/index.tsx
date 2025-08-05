@@ -1,5 +1,5 @@
 import './styles.css';
-import * as productService from '../../../services/itemlost-service';
+import * as itemLostService from '../../../services/itemlost-service';
 import editIcon from '../../../assets/edit.svg';
 import deleteIcon from '../../../assets/delete.svg';
 import { useEffect, useState } from 'react';
@@ -33,7 +33,7 @@ export default function ItemlostListing() {
 
     const [isLastPage, setIsLastPage] = useState(false);
 
-    const [products, setProducts] = useState<ItemLostDTO[]>([]);
+    const [itemlost, setItemLost] = useState<ItemLostDTO[]>([]);
 
     const [queryParams, setQueryParam] = useState<QueryParams>({
         page: 0,
@@ -41,20 +41,20 @@ export default function ItemlostListing() {
     });
 
     useEffect(() => {
-        productService.findPageRequest(queryParams.page, queryParams.name)
+        itemLostService.findPageRequest(queryParams.page, queryParams.name)
             .then(response => {
                 const nextPage = response.data.content;
-                setProducts(products.concat(nextPage));
+                setItemLost(itemlost.concat(nextPage));
                 setIsLastPage(response.data.last);
             });
     }, [queryParams]);
 
     function handleNewProductClick() {
-        navigate("/admin/products/create");
+        navigate("/admin/itemlost/create");
     }
 
     function handleSearch(searchText: string) {
-        setProducts([]);
+        setItemLost([]);
         setQueryParam({ ...queryParams, page: 0, name: searchText });
     }
 
@@ -66,8 +66,8 @@ export default function ItemlostListing() {
         setDialogInfoData({ ...dialogInfoData, visible: false });
     }
 
-    function handleUpdateClick(productId: number) {
-        navigate(`/admin/products/${productId}`);
+    function handleUpdateClick(itemlostId: number) {
+        navigate(`/admin/itemlost/${itemlostId}`);
     }
 
     function handleDeleteClick(productId: number) {
@@ -76,9 +76,9 @@ export default function ItemlostListing() {
 
     function handleDialogConfirmationAnswer(answer: boolean, productId: number) {
         if (answer) {
-            productService.deleteById(productId)
+            itemLostService.deleteById(productId)
                 .then(() => {
-                    setProducts([]);
+                    setItemLost([]);
                     setQueryParam({ ...queryParams, page: 0 });
                 })
                 .catch(error => {
@@ -118,7 +118,7 @@ export default function ItemlostListing() {
                     </thead>
                     <tbody>
                         {
-                            products.map(itemlost => (
+                            itemlost.map(itemlost => (
                                 <tr key={itemlost.id}>
                                     <td className="dsc-tb576">{itemlost.id}</td>
                                     <td><img className="dsc-product-listing-image" src={itemlost.imgUrl} alt={itemlost.description} /></td>
