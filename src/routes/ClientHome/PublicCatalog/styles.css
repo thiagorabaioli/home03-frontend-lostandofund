@@ -1,0 +1,30 @@
+#public-catalog-section {
+    padding: 20px 0;
+}
+
+.dsc-public-list-container {
+    background-color: var(--dsc-color-card-bg);
+    border-radius: 4px;
+    padding: 20px;
+    border: 1px solid var(--dsc-color-card-border);
+}
+
+.dsc-public-list-item {
+    border-bottom: 1px solid var(--dsc-color-card-border);
+    padding: 15px 5px;
+}
+
+.dsc-public-list-item:last-child {
+    border-bottom: none;
+}
+
+.dsc-public-item-desc {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--dsc-color-font-primary);
+}
+
+.dsc-public-item-date {
+    font-size: 12px;
+    color: var(--dsc-color-font-secondary);
+}

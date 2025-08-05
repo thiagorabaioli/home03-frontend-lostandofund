@@ -61,3 +61,12 @@ export function deliverRequest(id: number, owner: OwnerDTO) {
     }
     return requestBackend(config);
 }
+
+// FUNÇÃO ADICIONADA
+export function findPublicItems() {
+    const config: AxiosRequestConfig = {
+        method: "GET",
+        url: "/itemlosts/public", // Chama o novo endpoint público
+    }
+    return requestBackend(config);
+}

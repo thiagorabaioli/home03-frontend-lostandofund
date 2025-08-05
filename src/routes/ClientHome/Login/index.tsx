@@ -50,7 +50,8 @@ export default function Login() {
             .then(response => {
                 authService.saveAccessToken(response.data.access_token);
                 setContextTokenPayload(authService.getAccessTokenPayload());
-                navigate("/");
+                // CORREÇÃO AQUI: Redireciona para o catálogo após o login
+                navigate("/catalog");
             })
             .catch(() => {
                 setSubmitResponseFail(true);
@@ -94,7 +95,7 @@ export default function Login() {
                         {
                             submitResponseFail &&
                             <div className="dsc-form-global-error">
-                                Usuário ou senha inválidos
+                                Utilizador ou senha inválidos
                             </div>
                         }
 

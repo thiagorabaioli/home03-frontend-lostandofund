@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import FormInput from '../../../components/FormInput';
 import * as forms from '../../../utils/forms';
 import * as itemlostService from '../../../services/itemlost-service';
-import FormTextArea from '../../../components/FormTextArea';
+
 
 export default function ItemLostForm() {
 

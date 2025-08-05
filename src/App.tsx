@@ -15,6 +15,7 @@ import ItemlostListing from './routes/Admin/ItemLostListing';
 import ItemLostForm from './routes/Admin/ItemLostForm';
 import ItemLostDetails from './routes/ClientHome/ItemLostDetails';
 import DeliverForm from './routes/Admin/DeliveryForm';
+import PublicCatalog from './routes/ClientHome/PublicCatalog';
 
 export default function App() {
 
@@ -32,8 +33,11 @@ export default function App() {
       <HistoryRouter history={history}>
         <Routes>
           <Route path="/" element={<ClientHome />}>
-            <Route index element={<Catalog />} />
+            {/* CORREÇÃO AQUI: A rota principal agora redireciona */}
+            <Route index element={<Navigate to="/public-catalog" />} />
+            
             <Route path="catalog" element={<Catalog />} />
+            <Route path="public-catalog" element={<PublicCatalog />} />
             <Route path="itemlost-details/:itemlostId" element={<ItemLostDetails />} />
             <Route path="login" element={<Login />} />
           </Route>
