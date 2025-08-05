@@ -16,7 +16,7 @@ type QueryParams = {
     name: string;
 }
 
-export default function ProductListing() {
+export default function ItemlostListing() {
 
     const navigate = useNavigate();
 

@@ -16,7 +16,7 @@ import { ContextToken } from './utils/context-token';
 import * as authService from './services/auth-service';
 import * as cartService from './services/cart-service';
 import Confirmation from './routes/ClientHome/Confirmation';
-import ProductListing from './routes/Admin/ItemLostListing';
+import ItemlostListing from './routes/Admin/ItemLostListing';
 import ProductForm from './routes/Admin/ProductForm';
 
 export default function App() {
@@ -42,7 +42,7 @@ export default function App() {
             <Route path="/" element={<ClientHome />}>
               <Route index element={<Catalog />} />
               <Route path="catalog" element={<Catalog />} />
-              <Route path="product-details/:productId" element={<ProductDetails />} />
+              <Route path="itemlost-details/:itemlosttId" element={<ProductDetails />} />
               <Route path="cart" element={<Cart />} />
               <Route path="login" element={<Login />} />
               <Route path="confirmation/:orderId" element={<PrivateRoute><Confirmation /></PrivateRoute>} />
@@ -50,8 +50,8 @@ export default function App() {
             <Route path="/admin/" element={<PrivateRoute roles={['ROLE_ADMIN']}><Admin /></PrivateRoute>}>
               <Route index element={<Navigate to="/admin/home" />} />
               <Route path="home" element={<AdminHome />} />
-              <Route path="products" element={<ProductListing />} />
-              <Route path="products/:productId" element={<ProductForm />} />
+              <Route path="itemlosts" element={<ItemlostListing />} />
+              <Route path="itemlosts/:itemlostsId" element={<ProductForm />} />
             </Route>
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>

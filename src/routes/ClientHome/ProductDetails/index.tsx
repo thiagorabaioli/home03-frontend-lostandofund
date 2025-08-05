@@ -5,12 +5,12 @@ import ProductDetailsCard from "../../../components/ProductDetailsCard";
 import { useNavigate, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
-import { ProductDTO } from '../../../models/itemlosts';
+import { ItemLostDTO } from '../../../models/itemlosts';
 import * as productService from '../../../services/itemlost-service';
 import * as cartService from '../../../services/cart-service';
 import { ContextCartCount } from '../../../utils/context-cart';
 
-export default function ProductDetails() {
+export default function ItemLostDetails() {
 
   const params = useParams();
 
@@ -18,7 +18,7 @@ export default function ProductDetails() {
 
   const { setContextCartCount } = useContext(ContextCartCount);
 
-  const [product, setProduct] = useState<ProductDTO>();
+  const [product, setProduct] = useState<ItemLostDTO>();
 
   useEffect(() => {
     productService.findById(Number(params.productId))
