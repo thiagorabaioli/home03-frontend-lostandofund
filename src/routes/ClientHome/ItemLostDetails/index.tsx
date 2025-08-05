@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { ItemLostDTO } from '../../../models/itemlosts';
-import * as productService from '../../../services/itemlost-service';
+import * as itemlostService from '../../../services/itemlost-service';
 import * as cartService from '../../../services/cart-service';
 import { ContextCartCount } from '../../../utils/context-cart';
 
@@ -18,12 +18,12 @@ export default function ItemLostDetails() {
 
   const { setContextCartCount } = useContext(ContextCartCount);
 
-  const [product, setProduct] = useState<ItemLostDTO>();
+  const [itemlost, setItemlosts] = useState<ItemLostDTO>();
 
   useEffect(() => {
-    productService.findById(Number(params.productId))
+    itemlostService.findById(Number(params.productId))
       .then(response => {
-        setProduct(response.data);
+        setItemlosts(response.data);
       })
       .catch(() => {
         navigate("/");
@@ -31,8 +31,8 @@ export default function ItemLostDetails() {
   }, []);
 
   function handleBuyClick() {
-    if (product) {
-      cartService.addProduct(product);
+    if (itemlost) {
+      cartService.addProduct(itemlost);
       setContextCartCount(cartService.getCart().items.length);
       navigate("/cart");
     }
@@ -42,8 +42,8 @@ export default function ItemLostDetails() {
     <main>
       <section id="product-details-section" className="dsc-container">
         {
-          product &&
-          <ProductDetailsCard product={product} />
+          itemlost &&
+          <ProductDetailsCard product={itemlost} />
         }
         <div className="dsc-btn-page-container">
           <div onClick={handleBuyClick}>

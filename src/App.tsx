@@ -6,7 +6,7 @@ import ClientHome from './routes/ClientHome';
 import Cart from './routes/ClientHome/Cart';
 import Catalog from './routes/ClientHome/Catalog';
 import Login from './routes/ClientHome/Login';
-import ProductDetails from './routes/ClientHome/ProductDetails';
+import ProductDetails from './routes/ClientHome/ItemLostDetails';
 import { ContextCartCount } from './utils/context-cart';
 import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
 import { history } from './utils/history';

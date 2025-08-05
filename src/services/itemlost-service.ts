@@ -7,6 +7,7 @@ export function findPageRequest(page: number, name: string, size = 12, sort = "d
     const config : AxiosRequestConfig = {
         method: "GET",
         url: "/itemlosts",
+          withCredentials: true, // Adicione esta linha
         params: {
             page,
             name,
