@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import FormInput from '../../../components/FormInput';
 import * as forms from '../../../utils/forms';
-import * as productService from '../../../services/product-service';
+import * as productService from '../../../services/itemlost-service';
 import * as categoryService from '../../../services/category-service';
 import FormTextArea from '../../../components/FormTextArea';
-import { CategoryDTO } from '../../../models/category';
+import { CategoryDTO } from '../../../models/orderitem';
 import FormSelect from '../../../components/FormSelect';
 import { selectStyles } from '../../../utils/select';
 

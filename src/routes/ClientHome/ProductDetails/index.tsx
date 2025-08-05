@@ -5,8 +5,8 @@ import ProductDetailsCard from "../../../components/ProductDetailsCard";
 import { useNavigate, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
-import { ProductDTO } from '../../../models/product';
-import * as productService from '../../../services/product-service';
+import { ProductDTO } from '../../../models/itemlosts';
+import * as productService from '../../../services/itemlost-service';
 import * as cartService from '../../../services/cart-service';
 import { ContextCartCount } from '../../../utils/context-cart';
 

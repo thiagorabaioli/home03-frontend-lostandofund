@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { ProductDTO } from "../models/product";
+import { ItemLostDTO } from "../models/itemlosts";
 import { requestBackend } from "../utils/requests";
 import { BASE_URL } from "../utils/system";
 
@@ -32,7 +32,7 @@ export function deleteById(id: number) {
     return requestBackend(config);
 }
 
-export function updateRequest(obj: ProductDTO) {
+export function updateRequest(obj: ItemLostDTO) {
     const config: AxiosRequestConfig = {
         method: "PUT",
         url: `/itemlosts/${obj.id}`,
@@ -43,7 +43,7 @@ export function updateRequest(obj: ProductDTO) {
     return requestBackend(config);
 }
 
-export function insertRequest(obj: ProductDTO) {
+export function insertRequest(obj: ItemLostDTO) {
     const config: AxiosRequestConfig = {
         method: "POST",
         url: "/itemlosts",

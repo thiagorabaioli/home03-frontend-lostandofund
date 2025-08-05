@@ -1,9 +1,9 @@
 import './styles.css';
-import * as productService from '../../../services/product-service';
+import * as productService from '../../../services/itemlost-service';
 import editIcon from '../../../assets/edit.svg';
 import deleteIcon from '../../../assets/delete.svg';
 import { useEffect, useState } from 'react';
-import { ProductDTO } from '../../../models/product';
+import { ItemLostDTO } from '../../../models/itemlosts';
 import SearchBar from '../../../components/SearchBar';
 import ButtonNextPage from '../../../components/ButtonNextPage';
 import DialogInfo from '../../../components/DialogInfo';
@@ -33,7 +33,7 @@ export default function ProductListing() {
 
     const [isLastPage, setIsLastPage] = useState(false);
 
-    const [products, setProducts] = useState<ProductDTO[]>([]);
+    const [products, setProducts] = useState<ItemLostDTO[]>([]);
 
     const [queryParams, setQueryParam] = useState<QueryParams>({
         page: 0,
@@ -118,14 +118,14 @@ export default function ProductListing() {
                     </thead>
                     <tbody>
                         {
-                            products.map(product => (
-                                <tr key={product.id}>
-                                    <td className="dsc-tb576">{product.id}</td>
-                                    <td><img className="dsc-product-listing-image" src={product.imgUrl} alt={product.name} /></td>
-                                    <td className="dsc-tb768">R$ {product.price.toFixed(2)}</td>
-                                    <td className="dsc-txt-left">{product.name}</td>
-                                    <td><img onClick={() => handleUpdateClick(product.id)} className="dsc-product-listing-btn" src={editIcon} alt="Editar" /></td>
-                                    <td><img onClick={() => handleDeleteClick(product.id)} className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar" /></td>
+                            products.map(itemlost => (
+                                <tr key={itemlost.id}>
+                                    <td className="dsc-tb576">{itemlost.id}</td>
+                                    <td><img className="dsc-product-listing-image" src={itemlost.imgUrl} alt={itemlost.description} /></td>
+                                    <td className="dsc-tb768">R$ {itemlost.location}</td>
+                                    <td className="dsc-txt-left">{itemlost.description}</td>
+                                    <td><img onClick={() => handleUpdateClick(itemlost.id)} className="dsc-product-listing-btn" src={editIcon} alt="Editar" /></td>
+                                    <td><img onClick={() => handleDeleteClick(itemlost.id)} className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar" /></td>
                                 </tr>
                             ))
                         }
