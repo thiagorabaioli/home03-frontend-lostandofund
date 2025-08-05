@@ -1,4 +1,4 @@
-export type RoleEnum = "ROLE_ADMIN" | "ROLE_CLIENT";
+export type RoleEnum = "ROLE_ADMIN" | "ROLE_CLIENT" | "ROLE_OPERATOR" | "ROLE_VIGILANTE";
 
 export type CredentialsDTO = {
   username: string;

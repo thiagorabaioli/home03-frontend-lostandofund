@@ -18,6 +18,8 @@ import Confirmation from './routes/ClientHome/Confirmation';
 import ItemlostListing from './routes/Admin/ItemLostListing';
 import ItemLostForm from './routes/Admin/ItemLostForm';
 import ItemLostDetails from './routes/ClientHome/ItemLostDetails';
+import DeliverForm from './routes/Admin/DeliveryForm'; // Adicione esta importação
+
 
 export default function App() {
 
@@ -52,6 +54,7 @@ export default function App() {
               <Route path="home" element={<AdminHome />} />
               <Route path="itemlosts" element={<ItemlostListing />} />
               <Route path="itemlosts/:itemlostId" element={<ItemLostForm />} />
+              <Route path="itemlosts/:itemlostId/deliver" element={<DeliverForm />} /> {/* ROTA ADICIONADA AQUI */}
             </Route>
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>

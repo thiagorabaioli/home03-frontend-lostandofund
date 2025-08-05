@@ -9,7 +9,7 @@ export default function HeaderAdmin() {
     return (
         <header className="dsc-header-admin">
             <nav className="dsc-container">
-                <h1>DSCommerce</h1>
+                <h1>Lost & Found - Admin</h1>
                 <div className="dsc-navbar-right">
                     <div className="dsc-menu-items-container">
                         <NavLink 
@@ -22,12 +22,12 @@ export default function HeaderAdmin() {
                             </div>
                         </NavLink>
                         <NavLink 
-                            to="/admin/products"
+                            to="/admin/itemlosts"
                             className={({isActive}) => isActive ? "dsc-menu-item-active" : ""}
                         >
                             <div className="dsc-menu-item">
-                                <img src={productsIcon} alt="Cadastro de produtos" />
-                                <p>Produtos</p>
+                                <img src={productsIcon} alt="Cadastro de itens" />
+                                <p>Itens Perdidos</p>
                             </div>
                         </NavLink>
                     </div>

@@ -15,13 +15,13 @@ export default function HeaderClient() {
         <header className="dsc-header-client">
             <nav className="dsc-container">
                 <Link to="/">
-                    <h1>DSCommerce</h1>
+                    <h1>Lost & Found</h1>
                 </Link>
                 <div className="dsc-navbar-right">
                     <div className="dsc-menu-items-container">
                         {
                             contextTokenPayload &&
-                            authService.hasAnyRoles(['ROLE_ADMIN']) &&
+                            authService.hasAnyRoles(['ROLE_ADMIN', 'ROLE_VIGILANTE']) &&
                             <Link to="/admin">
                                 <div className="dsc-menu-item">
                                     <img src={iconAdmin} alt="Admin" />

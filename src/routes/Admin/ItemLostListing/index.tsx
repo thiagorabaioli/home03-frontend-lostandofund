@@ -32,9 +32,7 @@ export default function ItemlostListing() {
     });
 
     const [isLastPage, setIsLastPage] = useState(false);
-
     const [itemlost, setItemLost] = useState<ItemLostDTO[]>([]);
-
     const [queryParams, setQueryParam] = useState<QueryParams>({
         page: 0,
         name: ""
@@ -44,13 +42,13 @@ export default function ItemlostListing() {
         itemLostService.findPageRequest(queryParams.page, queryParams.name)
             .then(response => {
                 const nextPage = response.data.content;
-                setItemLost(itemlost.concat(nextPage));
+                setItemLost(queryParams.page === 0 ? nextPage : itemlost.concat(nextPage));
                 setIsLastPage(response.data.last);
             });
     }, [queryParams]);
 
     function handleNewProductClick() {
-        navigate("/admin/itemlost/create");
+        navigate("/admin/itemlosts/create");
     }
 
     function handleSearch(searchText: string) {
@@ -67,7 +65,7 @@ export default function ItemlostListing() {
     }
 
     function handleUpdateClick(itemlostId: number) {
-        navigate(`/admin/itemlost/${itemlostId}`);
+        navigate(`/admin/itemlosts/${itemlostId}`);
     }
 
     function handleDeleteClick(productId: number) {
@@ -88,18 +86,22 @@ export default function ItemlostListing() {
                     })
                 });
         }
-
         setDialogConfirmationData({ ...dialogConfirmationData, visible: false });
+    }
+
+    // CORREÇÃO: Esta função agora navega para a nova página
+    function handleDeliverClick(itemlostId: number) {
+        navigate(`/admin/itemlosts/${itemlostId}/deliver`);
     }
 
     return (
         <main>
             <section id="product-listing-section" className="dsc-container">
-                <h2 className="dsc-section-title dsc-mb20">Cadastro de produtos</h2>
+                <h2 className="dsc-section-title dsc-mb20">Itens Perdidos</h2>
 
                 <div className="dsc-btn-page-container dsc-mb20">
                     <div onClick={handleNewProductClick}>
-                        <ButtonInverse text="Novo" />
+                        <ButtonInverse text="Novo Item" />
                     </div>
                 </div>
 
@@ -110,22 +112,26 @@ export default function ItemlostListing() {
                         <tr>
                             <th className="dsc-tb576">ID</th>
                             <th></th>
-                            <th className="dsc-tb768">Preço</th>
-                            <th className="dsc-txt-left">Nome</th>
+                            <th className="dsc-txt-left">Descrição</th>
+                            <th className="dsc-tb768">Status</th>
+                            <th></th>
                             <th></th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            itemlost.map(itemlost => (
-                                <tr key={itemlost.id}>
-                                    <td className="dsc-tb576">{itemlost.id}</td>
-                                    <td><img className="dsc-product-listing-image" src={itemlost.imgUrl} alt={itemlost.description} /></td>
-                                    <td className="dsc-tb768">R$ {itemlost.location}</td>
-                                    <td className="dsc-txt-left">{itemlost.description}</td>
-                                    <td><img onClick={() => handleUpdateClick(itemlost.id)} className="dsc-product-listing-btn" src={editIcon} alt="Editar" /></td>
-                                    <td><img onClick={() => handleDeleteClick(itemlost.id)} className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar" /></td>
+                            itemlost.map(item => (
+                                <tr key={item.id}>
+                                    <td className="dsc-tb576">{item.id}</td>
+                                    <td><img className="dsc-product-listing-image" src={item.imgUrl} alt={item.description} /></td>
+                                    <td className="dsc-txt-left">{item.description}</td>
+                                    <td className="dsc-tb768">{item.status ? "Perdido" : "Entregue"}</td>
+                                    <td>
+                                        {item.status && <div onClick={() => handleDeliverClick(item.id)} className="dsc-product-listing-btn">Entregar</div>}
+                                    </td>
+                                    <td><img onClick={() => handleUpdateClick(item.id)} className="dsc-product-listing-btn" src={editIcon} alt="Editar" /></td>
+                                    <td><img onClick={() => handleDeleteClick(item.id)} className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar" /></td>
                                 </tr>
                             ))
                         }
@@ -137,7 +143,7 @@ export default function ItemlostListing() {
                     <ButtonNextPage onNextPage={handleNextPageClick} />
                 }
             </section>
-
+            
             {
                 dialogInfoData.visible &&
                 <DialogInfo
