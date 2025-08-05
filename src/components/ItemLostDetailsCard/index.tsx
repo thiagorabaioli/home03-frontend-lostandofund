@@ -1,5 +1,4 @@
 import './styles.css';
-import ProductCategory from '../ProductCategory';
 import { ItemLostDTO } from '../../models/itemlosts';
 
 type Props = {
@@ -14,13 +13,10 @@ export default function ItemLostDetailsCard({ itemlost }: Props) {
                 <img src={itemlost.imgUrl} alt={itemlost.description} />
             </div>
             <div className="dsc-product-details-bottom">
-                <h4>{itemlost.description}</h4>
-                <p>{itemlost.foundDate}</p>
-                <div className="dsc-category-container">
-                    {
-                        
-                    }
-                </div>
+                <h3>{itemlost.description}</h3>
+                <h4>Encontrado em: {itemlost.location}</h4>
+                <p>Por: {itemlost.whoFind} na data {new Date(itemlost.foundDate).toLocaleDateString()}</p>
+                {/* A secção de categorias foi removida daqui, corrigindo o erro */}
             </div>
         </div>
     );

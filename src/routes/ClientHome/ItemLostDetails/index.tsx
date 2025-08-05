@@ -1,41 +1,32 @@
 import './styles.css';
 import ButtonInverse from "../../../components/ButtonInverse";
-import ButtonPrimary from "../../../components/ButtonPrimary";
-import ProductDetailsCard from "../../../components/ProductDetailsCard";
+import ItemLostDetailsCard from "../../../components/ItemLostDetailsCard";
 import { useNavigate, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ItemLostDTO } from '../../../models/itemlosts';
 import * as itemlostService from '../../../services/itemlost-service';
-import * as cartService from '../../../services/cart-service';
-import { ContextCartCount } from '../../../utils/context-cart';
 
 export default function ItemLostDetails() {
 
   const params = useParams();
-
   const navigate = useNavigate();
-
-  const { setContextCartCount } = useContext(ContextCartCount);
-
-  const [itemlost, setItemlosts] = useState<ItemLostDTO>();
+  const [itemlost, setItemlost] = useState<ItemLostDTO>();
 
   useEffect(() => {
-    itemlostService.findById(Number(params.productId))
+    // AQUI ESTÁ A CORREÇÃO PRINCIPAL: Usar 'itemlostId' em vez de 'productId'
+    itemlostService.findById(Number(params.itemlostId))
       .then(response => {
-        setItemlosts(response.data);
+        setItemlost(response.data);
       })
       .catch(() => {
         navigate("/");
       });
-  }, []);
+  }, [params.itemlostId]); // Adicionar dependência para recarregar se o ID mudar
 
-  function handleBuyClick() {
-    if (itemlost) {
-      cartService.addProduct(itemlost);
-      setContextCartCount(cartService.getCart().items.length);
-      navigate("/cart");
-    }
+  function handleClaimItem() {
+    // Futura lógica para reclamar o item
+    navigate("/login");
   }
 
   return (
@@ -43,11 +34,11 @@ export default function ItemLostDetails() {
       <section id="product-details-section" className="dsc-container">
         {
           itemlost &&
-          <ProductDetailsCard product={itemlost} />
+          <ItemLostDetailsCard itemlost={itemlost} />
         }
         <div className="dsc-btn-page-container">
-          <div onClick={handleBuyClick}>
-            <ButtonPrimary text="Comprar" />
+          <div onClick={handleClaimItem}>
+            <div className="dsc-btn dsc-btn-blue">Reclamar item</div>
           </div>
           <Link to="/">
             <ButtonInverse text="Início" />
