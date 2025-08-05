@@ -89,7 +89,7 @@ export default function ItemlostListing() {
         setDialogConfirmationData({ ...dialogConfirmationData, visible: false });
     }
 
-    // CORREÇÃO AQUI: Esta função agora navega para a página do formulário de entrega
+    // CORREÇÃO FINAL: Esta função agora navega para a página do formulário de entrega
     function handleDeliverClick(itemlostId: number) {
         navigate(`/admin/itemlosts/${itemlostId}/deliver`);
     }
@@ -128,6 +128,7 @@ export default function ItemlostListing() {
                                     <td className="dsc-txt-left">{item.description}</td>
                                     <td className="dsc-tb768">{item.status ? "Perdido" : "Entregue"}</td>
                                     <td>
+                                        {/* Este botão agora chama a função correta */}
                                         {item.status && <div onClick={() => handleDeliverClick(item.id)} className="dsc-product-listing-btn">Entregar</div>}
                                     </td>
                                     <td><img onClick={() => handleUpdateClick(item.id)} className="dsc-product-listing-btn" src={editIcon} alt="Editar" /></td>
