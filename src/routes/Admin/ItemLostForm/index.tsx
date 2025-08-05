@@ -3,53 +3,18 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import FormInput from '../../../components/FormInput';
 import * as forms from '../../../utils/forms';
-import * as productService from '../../../services/itemlost-service';
-import * as categoryService from '../../../services/category-service';
+import * as itemlostService from '../../../services/itemlost-service';
 import FormTextArea from '../../../components/FormTextArea';
-import { CategoryDTO } from '../../../models/orderitem';
-import FormSelect from '../../../components/FormSelect';
-import { selectStyles } from '../../../utils/select';
 
-export default function ProductForm() {
+export default function ItemLostForm() {
 
     const params = useParams();
 
     const navigate = useNavigate();
 
-    const isEditing = params.productId !== 'create';
-
-    const [categories, setCategories] = useState<CategoryDTO[]>([]);
+    const isEditing = params.itemlostId !== 'create';
 
     const [formData, setFormData] = useState<any>({
-        name: {
-            value: "",
-            id: "name",
-            name: "name",
-            type: "text",
-            placeholder: "Nome",
-            validation: function (value: string) {
-                return /^.{3,80}$/.test(value);
-            },
-            message: "Favor informar um nome de 3 a 80 caracteres"
-        },
-        price: {
-            value: "",
-            id: "price",
-            name: "price",
-            type: "number",
-            placeholder: "Preço",
-            validation: function (value: any) {
-                return Number(value) > 0;
-            },
-            message: "Favor informar um valor positivo"
-        },
-        imgUrl: {
-            value: "",
-            id: "imgUrl",
-            name: "imgUrl",
-            type: "text",
-            placeholder: "Imagem",
-        },
         description: {
             value: "",
             id: "description",
@@ -59,30 +24,42 @@ export default function ProductForm() {
             validation: function (value: string) {
                 return /^.{10,}$/.test(value);
             },
-            message: "A descrição deve ter pelos menos 10 caracteres"
+            message: "A descrição deve ter pelo menos 10 caracteres"
         },
-        categories: {
-            value: [],
-            id: "categories",
-            name: "categories",
-            placeholder: "Categorias",
-            validation: function (value: CategoryDTO[]) {
-                return value.length > 0;
+        imgUrl: {
+            value: "",
+            id: "imgUrl",
+            name: "imgUrl",
+            type: "text",
+            placeholder: "URL da Imagem",
+        },
+        location: {
+            value: "",
+            id: "location",
+            name: "location",
+            type: "text",
+            placeholder: "Local onde foi encontrado",
+            validation: function (value: string) {
+                return /^.{3,80}$/.test(value);
             },
-            message: "Escolha ao menos uma categoria"
+            message: "A localização deve ter de 3 a 80 caracteres"
+        },
+        whoFind: {
+            value: "",
+            id: "whoFind",
+            name: "whoFind",
+            type: "text",
+            placeholder: "Quem encontrou",
+            validation: function (value: string) {
+                return /^.{3,80}$/.test(value);
+            },
+            message: "O nome deve ter de 3 a 80 caracteres"
         }
     });
 
     useEffect(() => {
-        categoryService.findAllRequest()
-            .then(response => {
-                setCategories(response.data);
-            });
-    }, []);
-
-    useEffect(() => {
         if (isEditing) {
-            productService.findById(Number(params.productId))
+            itemlostService.findById(Number(params.itemlostId))
                 .then(response => {
                     const newFormData = forms.updateAll(formData, response.data);
                     setFormData(newFormData);
@@ -109,16 +86,16 @@ export default function ProductForm() {
 
         const requestBody = forms.toValues(formData);
         if (isEditing) {
-            requestBody.id = params.productId;
+            requestBody.id = params.itemlostId;
         }
 
         const request = isEditing
-            ? productService.updateRequest(requestBody)
-            : productService.insertRequest(requestBody);
+            ? itemlostService.updateRequest(requestBody)
+            : itemlostService.insertRequest(requestBody);
 
         request
             .then(() => {
-                navigate("/admin/products");
+                navigate("/admin/itemlosts");
             })
             .catch(error => {
                 const newInputs = forms.setBackendErrors(formData, error.response.data.errors);
@@ -131,25 +108,25 @@ export default function ProductForm() {
             <section id="product-form-section" className="dsc-container">
                 <div className="dsc-product-form-container">
                     <form className="dsc-card dsc-form" onSubmit={handleSubmit}>
-                        <h2>Dados do produto</h2>
+                        <h2>Dados do Item</h2>
                         <div className="dsc-form-controls-container">
                             <div>
                                 <FormInput
-                                    {...formData.name}
+                                    {...formData.description}
                                     className="dsc-form-control"
                                     onTurnDirty={handleTurnDirty}
                                     onChange={handleInputChange}
                                 />
-                                <div className="dsc-form-error">{formData.name.message}</div>
+                                <div className="dsc-form-error">{formData.description.message}</div>
                             </div>
-                            <div>
+                             <div>
                                 <FormInput
-                                    {...formData.price}
+                                    {...formData.location}
                                     className="dsc-form-control"
                                     onTurnDirty={handleTurnDirty}
                                     onChange={handleInputChange}
                                 />
-                                <div className="dsc-form-error">{formData.price.message}</div>
+                                <div className="dsc-form-error">{formData.location.message}</div>
                             </div>
                             <div>
                                 <FormInput
@@ -160,35 +137,18 @@ export default function ProductForm() {
                                 />
                             </div>
                             <div>
-                                <FormSelect
-                                    {...formData.categories}
-                                    className="dsc-form-control dsc-form-select-container"
-                                    styles={selectStyles}
-                                    options={categories}
-                                    onChange={(obj: any) => {
-                                        const newFormData = forms.updateAndValidate(formData, "categories", obj);
-                                        setFormData(newFormData);
-                                    }}
-                                    onTurnDirty={handleTurnDirty}
-                                    isMulti
-                                    getOptionLabel={(obj: any) => obj.name}
-                                    getOptionValue={(obj: any) => String(obj.id)}
-                                />
-                                <div className="dsc-form-error">{formData.categories.message}</div>
-                            </div>
-                            <div>
-                                <FormTextArea
-                                    {...formData.description}
-                                    className="dsc-form-control dsc-textarea"
+                                <FormInput
+                                    {...formData.whoFind}
+                                    className="dsc-form-control"
                                     onTurnDirty={handleTurnDirty}
                                     onChange={handleInputChange}
                                 />
-                                <div className="dsc-form-error">{formData.description.message}</div>
+                                <div className="dsc-form-error">{formData.whoFind.message}</div>
                             </div>
                         </div>
 
                         <div className="dsc-product-form-buttons">
-                            <Link to="/admin/products">
+                            <Link to="/admin/itemlosts">
                                 <button type="reset" className="dsc-btn dsc-btn-white">Cancelar</button>
                             </Link>
                             <button type="submit" className="dsc-btn dsc-btn-blue">Salvar</button>

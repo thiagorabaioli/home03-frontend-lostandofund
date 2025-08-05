@@ -13,20 +13,19 @@ export default function ItemLostDetails() {
   const [itemlost, setItemlost] = useState<ItemLostDTO>();
 
   useEffect(() => {
-    // CORREÇÃO AQUI: Usar 'id'
-    itemlostService.findById(Number(params.id))
+    // AQUI ESTÁ A CORREÇÃO: Usar 'itemlostId' que foi definido na rota
+    itemlostService.findById(Number(params.itemlostId))
       .then(response => {
         setItemlost(response.data);
       })
       .catch(() => {
         navigate("/");
       });
-  }, [params.id]);
+  }, [params.itemlostId]);
 
 
   function handleClaimItem() {
-    // Futura lógica para reclamar o item
-    navigate("/login");
+    navigate("/cart"); // Simplificado para ir para o carrinho/lista
   }
 
   return (
