@@ -16,7 +16,7 @@ import * as authService from './services/auth-service';
 import * as cartService from './services/cart-service';
 import Confirmation from './routes/ClientHome/Confirmation';
 import ItemlostListing from './routes/Admin/ItemLostListing';
-import ProductForm from './routes/Admin/ProductForm';
+import ItemLostForm from './routes/Admin/ItemLostForm';
 import ItemLostDetails from './routes/ClientHome/ItemLostDetails';
 
 export default function App() {
@@ -51,7 +51,7 @@ export default function App() {
               <Route index element={<Navigate to="/admin/home" />} />
               <Route path="home" element={<AdminHome />} />
               <Route path="itemlosts" element={<ItemlostListing />} />
-              <Route path="itemlosts/:itemlostsId" element={<ProductForm />} />
+              <Route path="itemlosts/:itemlostId" element={<ItemLostForm />} />
             </Route>
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>

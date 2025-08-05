@@ -1,10 +1,10 @@
 export class OrderDTO {
   id?: number;
-  items: OrderItemDTO2[] = [];
+  items: OrderItemDTO[] = [];
 
 }
 
-export class OrderItemDTO2 {
+export class OrderItemDTO {
   constructor(
     public itemlostId: number,
     public description: string,
