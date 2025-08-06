@@ -1,6 +1,6 @@
 import './styles.css';
 import homeIcon from '../../assets/home.svg';
-import productsIcon from '../../assets/products.svg';
+import productsIcon from '../../assets/products.svg'; // Pode mudar o ícone se quiser
 import LoggedUser from '../LoggedUser';
 import { NavLink } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ export default function HeaderAdmin() {
     return (
         <header className="dsc-header-admin">
             <nav className="dsc-container">
-                <h1>Lost & Found - Admin</h1>
+                <h1>Lost and Found APP - Admin</h1>
                 <div className="dsc-navbar-right">
                     <div className="dsc-menu-items-container">
                         <NavLink 
@@ -21,8 +21,9 @@ export default function HeaderAdmin() {
                                 <p>Início</p>
                             </div>
                         </NavLink>
+                        {/* CORREÇÃO DO LINK E DO TEXTO */}
                         <NavLink 
-                            to="/admin/itemlosts"
+                            to="/admin/itemlosts" 
                             className={({isActive}) => isActive ? "dsc-menu-item-active" : ""}
                         >
                             <div className="dsc-menu-item">
