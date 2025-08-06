@@ -1,7 +1,7 @@
 import './styles.css';
 import * as itemLostService from '../../../services/itemlost-service';
 import editIcon from '../../../assets/edit.svg';
-import deleteIcon from '../../../assets/delete.svg';
+// import deleteIcon from '../../../assets/delete.svg'; // Ícone removido
 import { useEffect, useState } from 'react';
 import { ItemLostDTO } from '../../../models/itemlosts';
 import SearchBar from '../../../components/SearchBar';
@@ -25,11 +25,12 @@ export default function ItemlostListing() {
         message: "Operação com sucesso!"
     });
 
-    const [dialogConfirmationData, setDialogConfirmationData] = useState({
-        visible: false,
-        id: 0,
-        message: "Tem certeza?"
-    });
+    // A lógica de confirmação de apagar pode ser removida
+    // const [dialogConfirmationData, setDialogConfirmationData] = useState({
+    //     visible: false,
+    //     id: 0,
+    //     message: "Tem certeza?"
+    // });
 
     const [isLastPage, setIsLastPage] = useState(false);
     const [itemlost, setItemLost] = useState<ItemLostDTO[]>([]);
@@ -68,6 +69,8 @@ export default function ItemlostListing() {
         navigate(`/admin/itemlosts/${itemlostId}`);
     }
 
+    // As funções handleDeleteClick e handleDialogConfirmationAnswer já não são necessárias
+    /*
     function handleDeleteClick(productId: number) {
         setDialogConfirmationData({ ...dialogConfirmationData, id: productId, visible: true });
     }
@@ -88,6 +91,7 @@ export default function ItemlostListing() {
         }
         setDialogConfirmationData({ ...dialogConfirmationData, visible: false });
     }
+    */
 
     function handleDeliverClick(itemlostId: number) {
         navigate(`/admin/itemlosts/${itemlostId}/deliver`);
@@ -98,7 +102,6 @@ export default function ItemlostListing() {
             <section id="product-listing-section" className="dsc-container">
                 <h2 className="dsc-section-title dsc-mb20">Itens Perdidos</h2>
 
-                {/* CORREÇÃO AQUI: O botão "Novo Item" está de volta */}
                 <div className="dsc-btn-page-container dsc-mb20">
                     <div onClick={handleNewProductClick}>
                         <ButtonInverse text="Novo Item" />
@@ -117,7 +120,7 @@ export default function ItemlostListing() {
                             <th className="dsc-tb768">Status</th>
                             <th></th>
                             <th></th>
-                            <th></th>
+                            {/* Coluna do ícone de apagar removida */}
                         </tr>
                     </thead>
                     <tbody>
@@ -133,7 +136,7 @@ export default function ItemlostListing() {
                                         {item.status && <div onClick={() => handleDeliverClick(item.id)} className="dsc-product-listing-btn">Entregar</div>}
                                     </td>
                                     <td><img onClick={() => handleUpdateClick(item.id)} className="dsc-product-listing-btn" src={editIcon} alt="Editar" /></td>
-                                    <td><img onClick={() => handleDeleteClick(item.id)} className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar" /></td>
+                                    {/* Célula com o ícone de apagar removida */}
                                 </tr>
                             ))
                         }
@@ -154,14 +157,7 @@ export default function ItemlostListing() {
                 />
             }
 
-            {
-                dialogConfirmationData.visible &&
-                <DialogConfirmation
-                    id={dialogConfirmationData.id}
-                    message={dialogConfirmationData.message}
-                    onDialogAnswer={handleDialogConfirmationAnswer}
-                />
-            }
+            { /* O DialogConfirmation já não é necessário */ }
         </main>
     );
 }
