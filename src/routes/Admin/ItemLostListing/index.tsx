@@ -11,6 +11,7 @@ import DialogConfirmation from '../../../components/DialogConfirmation';
 import ButtonInverse from '../../../components/ButtonInverse';
 import { useNavigate } from 'react-router-dom';
 
+
 type QueryParams = {
     page: number;
     name: string;
@@ -18,6 +19,7 @@ type QueryParams = {
 
 export default function ItemlostListing() {
 
+    
     const navigate = useNavigate();
 
     const [dialogInfoData, setDialogInfoData] = useState({
@@ -38,8 +40,9 @@ export default function ItemlostListing() {
         name: ""
     });
 
-    useEffect(() => {
-        itemLostService.findPageRequest(queryParams.page, queryParams.name)
+   useEffect(() => {
+        // CORREÇÃO AQUI: Passamos o parâmetro de ordenação para o serviço
+        itemLostService.findPageRequest(queryParams.page, queryParams.name, 12, "id")
             .then(response => {
                 const nextPage = response.data.content;
                 setItemLost(queryParams.page === 0 ? nextPage : itemlost.concat(nextPage));
@@ -94,18 +97,10 @@ export default function ItemlostListing() {
         navigate(`/admin/itemlosts/${itemlostId}/deliver`);
     }
 
-    return (
+     return (
         <main>
             <section id="product-listing-section" className="dsc-container">
-                <h2 className="dsc-section-title dsc-mb20">Itens Perdidos</h2>
-
-                <div className="dsc-btn-page-container dsc-mb20">
-                    <div onClick={handleNewProductClick}>
-                        <ButtonInverse text="Novo Item" />
-                    </div>
-                </div>
-
-                <SearchBar onSearch={handleSearch} />
+                {/* ... (título, botão e barra de pesquisa) ... */}
 
                 <table className="dsc-table dsc-mb20 dsc-mt20">
                     <thead>
@@ -113,6 +108,7 @@ export default function ItemlostListing() {
                             <th className="dsc-tb576">ID</th>
                             <th></th>
                             <th className="dsc-txt-left">Descrição</th>
+                            <th className="dsc-tb768">Data</th> {/* Coluna Adicionada */}
                             <th className="dsc-tb768">Status</th>
                             <th></th>
                             <th></th>
@@ -126,9 +122,10 @@ export default function ItemlostListing() {
                                     <td className="dsc-tb576">{item.id}</td>
                                     <td><img className="dsc-product-listing-image" src={item.imgUrl} alt={item.description} /></td>
                                     <td className="dsc-txt-left">{item.description}</td>
+                                    {/* Célula com a data formatada */}
+                                    <td className="dsc-tb768">{new Date(item.foundDate).toLocaleDateString()}</td>
                                     <td className="dsc-tb768">{item.status ? "Perdido" : "Entregue"}</td>
                                     <td>
-                                        {/* Este botão agora chama a função correta */}
                                         {item.status && <div onClick={() => handleDeliverClick(item.id)} className="dsc-product-listing-btn">Entregar</div>}
                                     </td>
                                     <td><img onClick={() => handleUpdateClick(item.id)} className="dsc-product-listing-btn" src={editIcon} alt="Editar" /></td>
