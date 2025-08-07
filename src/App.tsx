@@ -33,14 +33,14 @@ export default function App() {
       <HistoryRouter history={history}>
                 <Routes>
                   <Route path="/" element={<ClientHome />}>
-                    <Route index element={<Navigate to="/public-catalog" />} />
-                    <Route path="public-catalog" element={<PublicCatalog />} />
-                    <Route path="itemlost-details/:itemlostId" element={<ItemLostDetails />} />
-                    <Route path="login" element={<Login />} />
+                      <Route index element={<Navigate to="/public-catalog" />} />
+                      <Route path="public-catalog" element={<PublicCatalog />} />
+                      <Route path="login" element={<Login />} />
                   </Route>
                   
                   <Route path="/client/" element={<PrivateRoute roles={['ROLE_ADMIN', 'ROLE_VIGILANTE']}><ClientHome /></PrivateRoute>}>
-                    <Route index element={<Catalog />} />
+                        <Route index element={<Catalog />} />
+                        <Route path="itemlost-details/:itemlostId" element={<ItemLostDetails />} />
                   </Route>
 
                   <Route path="/admin/" element={<PrivateRoute roles={['ROLE_ADMIN', 'ROLE_VIGILANTE']}><Admin /></PrivateRoute>}>

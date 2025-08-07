@@ -47,15 +47,14 @@ export default function Login() {
         }
 
         authService.loginRequest(forms.toValues(formData))
-            .then(response => {
-                authService.saveAccessToken(response.data.access_token);
-                setContextTokenPayload(authService.getAccessTokenPayload());
-                // CORREÇÃO AQUI: Redireciona para o catálogo após o login
-                navigate("/catalog");
-            })
-            .catch(() => {
-                setSubmitResponseFail(true);
-            });
+                .then(response => {
+                    authService.saveAccessToken(response.data.access_token);
+                    setContextTokenPayload(authService.getAccessTokenPayload());
+                    navigate("/client");
+                })
+                .catch(() => {
+                    setSubmitResponseFail(true);
+                });
     }
 
     function handleInputChange(event: any) {
