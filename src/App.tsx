@@ -42,11 +42,11 @@ export default function App() {
             <Route path="login" element={<Login />} />
           </Route>
           <Route path="/admin/" element={<PrivateRoute roles={['ROLE_ADMIN', 'ROLE_VIGILANTE']}><Admin /></PrivateRoute>}>
-            <Route index element={<Navigate to="/admin/home" />} />
-            <Route path="home" element={<AdminHome />} />
-            <Route path="itemlosts" element={<ItemlostListing />} />
-            <Route path="itemlosts/:itemlostId" element={<ItemLostForm />} />
-            <Route path="itemlosts/:itemlostId/deliver" element={<DeliverForm />} />
+              <Route index element={<Navigate to="/admin/home" />} />
+              <Route path="home" element={<AdminHome />} />
+              <Route path="itemlosts" element={<ItemlostListing />} />
+              <Route path="itemlosts/:itemlostId" element={<ItemLostForm />} />
+              <Route path="itemlosts/:itemlostId/deliver" element={<DeliverForm />} />
           </Route>
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
