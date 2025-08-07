@@ -71,13 +71,12 @@ export default function DeliverForm() {
         const requestBody = forms.toValues(formData);
         itemlostService.deliverRequest(Number(params.itemlostId), requestBody)
             .then(() => {
-                // Navega em caso de sucesso
-                navigate("/admin/itemlosts");
+              
+                navigate("/client");
             })
             .catch(() => {
-                // CORREÇÃO: Força a navegação mesmo que a resposta seja interpretada como erro,
-                // porque sabemos que o backend está a funcionar.
-                navigate("/admin/itemlosts");
+              
+                navigate("/client");
             });
     }
 
@@ -116,13 +115,13 @@ export default function DeliverForm() {
                             </div>
                         </div>
 
-                        <div className="dsc-deliver-form-buttons">
-                            <Link to="/admin/itemlosts">
+                         <div className="dsc-deliver-form-buttons">
+                                <Link to="/client">
                                 <button type="reset" className="dsc-btn dsc-btn-white">Cancelar</button>
-                            </Link>
-                            <button type="submit" className="dsc-btn dsc-btn-blue">Confirmar Entrega</button>
-                        </div>
-                    </form>
+                                </Link>
+                                <button type="submit" className="dsc-btn dsc-btn-blue">Confirmar Entrega</button>
+                         </div>
+                        </form>
                 </div>
             </section>
         </main>
