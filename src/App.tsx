@@ -31,26 +31,29 @@ export default function App() {
   return (
     <ContextToken.Provider value={{ contextTokenPayload, setContextTokenPayload }}>
       <HistoryRouter history={history}>
-        <Routes>
-          <Route path="/" element={<ClientHome />}>
-            {/* CORREÇÃO AQUI: A rota principal agora redireciona */}
-            <Route index element={<Navigate to="/public-catalog" />} />
-            
-            <Route path="catalog" element={<Catalog />} />
-            <Route path="public-catalog" element={<PublicCatalog />} />
-            <Route path="itemlost-details/:itemlostId" element={<ItemLostDetails />} />
-            <Route path="login" element={<Login />} />
-          </Route>
-          <Route path="/admin/" element={<PrivateRoute roles={['ROLE_ADMIN', 'ROLE_VIGILANTE']}><Admin /></PrivateRoute>}>
-              <Route index element={<Navigate to="/admin/home" />} />
-              <Route path="home" element={<AdminHome />} />
-              <Route path="itemlosts" element={<ItemlostListing />} />
-              <Route path="itemlosts/:itemlostId" element={<ItemLostForm />} />
-              <Route path="itemlosts/:itemlostId/deliver" element={<DeliverForm />} />
-          </Route>
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
-      </HistoryRouter>
+                <Routes>
+                  <Route path="/" element={<ClientHome />}>
+                    <Route index element={<Navigate to="/public-catalog" />} />
+                    <Route path="public-catalog" element={<PublicCatalog />} />
+                    <Route path="itemlost-details/:itemlostId" element={<ItemLostDetails />} />
+                    <Route path="login" element={<Login />} />
+                  </Route>
+                  
+                  <Route path="/client/" element={<PrivateRoute roles={['ROLE_ADMIN', 'ROLE_VIGILANTE']}><ClientHome /></PrivateRoute>}>
+                    <Route index element={<Catalog />} />
+                  </Route>
+
+                  <Route path="/admin/" element={<PrivateRoute roles={['ROLE_ADMIN', 'ROLE_VIGILANTE']}><Admin /></PrivateRoute>}>
+                      <Route index element={<Navigate to="/admin/home" />} />
+                      <Route path="home" element={<AdminHome />} />
+                      <Route path="itemlosts" element={<ItemlostListing />} />
+                      <Route path="itemlosts/:itemlostId" element={<ItemLostForm />} />
+                      <Route path="itemlosts/:itemlostId/deliver" element={<DeliverForm />} />
+                  </Route>
+
+                  <Route path="*" element={<Navigate to="/" />} />
+                </Routes>
+       </HistoryRouter>
     </ContextToken.Provider>
   );
 }

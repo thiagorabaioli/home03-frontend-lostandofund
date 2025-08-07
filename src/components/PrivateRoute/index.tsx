@@ -12,7 +12,7 @@ export function PrivateRoute({ children, roles = [] }: Props) {
         return <Navigate to="/login" />;
     }
     if (!authService.hasAnyRoles(roles)) {
-        return <Navigate to="/catalog" />;
+        return <Navigate to="/" />;
     }
     return children;
 }
