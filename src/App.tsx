@@ -17,6 +17,7 @@ import ItemLostForm from './routes/ClientHome/ItemLostForm';
 import ItemLostDetails from './routes/ClientHome/ItemLostDetails';
 import DeliverForm from './routes/ClientHome/DeliveryForm';
 import PublicCatalog from './routes/ClientHome/PublicCatalog';
+import Footer from './components/Footer'; // 1. IMPORTE O NOVO COMPONENTE
 
 export default function App() {
 
@@ -33,6 +34,7 @@ export default function App() {
     <ContextToken.Provider value={{ contextTokenPayload, setContextTokenPayload }}>
       <HistoryRouter history={history}>
                 <Routes>
+                  {/* ... TODAS AS SUAS ROTAS CONTINUAM IGUAIS AQUI ... */}
                   <Route path="/" element={<ClientHome />}>
                       <Route index element={<Navigate to="/public-catalog" />} />
                       <Route path="public-catalog" element={<PublicCatalog />} />
@@ -54,6 +56,7 @@ export default function App() {
 
                   <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
+                <Footer /> {/* 2. ADICIONE O COMPONENTE FOOTER AQUI */}
        </HistoryRouter>
     </ContextToken.Provider>
   );

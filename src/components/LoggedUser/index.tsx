@@ -16,7 +16,7 @@ export default function LoggedUser() {
         contextTokenPayload && authService.isAuthenticated()
             ? (
                 <div className="dsc-logged-user">
-                    <p>{contextTokenPayload.user_name}</p>
+                    <p>{contextTokenPayload.username}</p>
                     <span onClick={handleLogoutClick}>Sair</span>
                 </div>
             )

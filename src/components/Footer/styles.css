@@ -1,0 +1,20 @@
+.dsc-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: var(--dsc-color-bg-secondary); /* Mesma cor amarela do header */
+    color: var(--dsc-color-font-primary);
+    display: flex;
+    align-items: center;
+    z-index: 10; /* Garante que o footer fique por cima de outros elementos */
+}
+
+.dsc-footer-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+}
