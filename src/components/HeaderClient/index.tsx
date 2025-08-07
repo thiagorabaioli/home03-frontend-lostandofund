@@ -15,7 +15,7 @@ export default function HeaderClient() {
         <header className="dsc-header-client">
             <nav className="dsc-container">
                 <Link to="/">
-                    <h1>Lost & Found</h1>
+                    <h1>Lost and Found WEB APP</h1>
                 </Link>
                 <div className="dsc-navbar-right">
                     <div className="dsc-menu-items-container">
