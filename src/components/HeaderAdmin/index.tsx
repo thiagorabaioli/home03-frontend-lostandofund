@@ -1,6 +1,6 @@
+// thiagorabaioli/frontend-lostandofund/frontend-lostandofund-1eb8ffea46adda1de78a07b005611f8d29e3b159/src/components/HeaderAdmin/index.tsx
 import './styles.css';
 import homeIcon from '../../assets/home.svg';
-import productsIcon from '../../assets/products.svg'; // Pode mudar o ícone se quiser
 import LoggedUser from '../LoggedUser';
 import { NavLink } from 'react-router-dom';
 
@@ -19,16 +19,6 @@ export default function HeaderAdmin() {
                             <div className="dsc-menu-item">
                                 <img src={homeIcon} alt="Início" />
                                 <p>Início</p>
-                            </div>
-                        </NavLink>
-                        {/* CORREÇÃO DO LINK E DO TEXTO */}
-                        <NavLink 
-                            to="/admin/itemlosts" 
-                            className={({isActive}) => isActive ? "dsc-menu-item-active" : ""}
-                        >
-                            <div className="dsc-menu-item">
-                                <img src={productsIcon} alt="Cadastro de itens" />
-                                <p>Itens Perdidos</p>
                             </div>
                         </NavLink>
                     </div>

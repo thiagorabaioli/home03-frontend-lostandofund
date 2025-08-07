@@ -1,3 +1,4 @@
+// thiagorabaioli/frontend-lostandofund/frontend-lostandofund-1eb8ffea46adda1de78a07b005611f8d29e3b159/src/App.tsx
 import { useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Admin from './routes/Admin';
@@ -11,10 +12,10 @@ import { PrivateRoute } from './components/PrivateRoute';
 import { AccessTokenPayloadDTO } from './models/auth';
 import { ContextToken } from './utils/context-token';
 import * as authService from './services/auth-service';
-import ItemlostListing from './routes/Admin/ItemLostListing';
-import ItemLostForm from './routes/Admin/ItemLostForm';
+import ItemlostListing from './routes/ClientHome/ItemLostListing';
+import ItemLostForm from './routes/ClientHome/ItemLostForm';
 import ItemLostDetails from './routes/ClientHome/ItemLostDetails';
-import DeliverForm from './routes/Admin/DeliveryForm';
+import DeliverForm from './routes/ClientHome/DeliveryForm';
 import PublicCatalog from './routes/ClientHome/PublicCatalog';
 
 export default function App() {
@@ -39,16 +40,17 @@ export default function App() {
                   </Route>
                   
                   <Route path="/client/" element={<PrivateRoute roles={['ROLE_ADMIN', 'ROLE_VIGILANTE']}><ClientHome /></PrivateRoute>}>
-                      <Route index element={<Catalog />} />
-                      <Route path="itemlost-details/:itemlostId" element={<ItemLostDetails />} />
-                      <Route path="itemlosts/:itemlostId/deliver" element={<DeliverForm />} />
+                        <Route index element={<Catalog />} />
+                        <Route path="itemlosts" element={<ItemlostListing />} />
+                        <Route path="itemlosts/create" element={<ItemLostForm />} />
+                        <Route path="itemlosts/:itemlostId" element={<ItemLostForm />} />
+                        <Route path="itemlost-details/:itemlostId" element={<ItemLostDetails />} />
+                        <Route path="itemlosts/:itemlostId/deliver" element={<DeliverForm />} />
                    </Route>
 
-                 <Route path="/admin/" element={<PrivateRoute roles={['ROLE_ADMIN', 'ROLE_VIGILANTE']}><Admin /></PrivateRoute>}>
+                 <Route path="/admin/" element={<PrivateRoute roles={['ROLE_ADMIN']}><Admin /></PrivateRoute>}>
                     <Route index element={<Navigate to="/admin/home" />} />
                     <Route path="home" element={<AdminHome />} />
-                    <Route path="itemlosts" element={<ItemlostListing />} />
-                    <Route path="itemlosts/:itemlostId" element={<ItemLostForm />} />
                  </Route>
 
                   <Route path="*" element={<Navigate to="/" />} />
