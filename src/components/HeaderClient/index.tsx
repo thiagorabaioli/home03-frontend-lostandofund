@@ -3,6 +3,7 @@ import './styles.css';
 import { Link } from 'react-router-dom';
 import iconAdmin from '../../assets/admin.svg';
 import addIcon from '../../assets/add.svg'; // Importa o novo ícone
+import homeIcon from '../../assets/home.svg'; // Importa o novo ícone
 import * as authService from '../../services/auth-service';
 import { useContext } from 'react';
 import { ContextToken } from '../../utils/context-token';
@@ -24,6 +25,11 @@ export default function HeaderClient() {
                             contextTokenPayload &&
                             authService.hasAnyRoles(['ROLE_ADMIN', 'ROLE_VIGILANTE']) &&
                             <>
+                                 <Link to="/client">
+                                    <div className="dsc-menu-item">
+                                        <img src={homeIcon} alt="Home" />
+                                    </div>
+                                  </Link>
                                 <Link to="/client/itemlosts/create">
                                     <div className="dsc-menu-item">
                                         <img src={addIcon} alt="Adicionar Item" />

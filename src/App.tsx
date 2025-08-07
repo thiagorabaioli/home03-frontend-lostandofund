@@ -1,4 +1,4 @@
-// thiagorabaioli/frontend-lostandofund/frontend-lostandofund-1eb8ffea46adda1de78a07b005611f8d29e3b159/src/App.tsx
+
 import { useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Admin from './routes/Admin';
@@ -42,7 +42,6 @@ export default function App() {
                   <Route path="/client/" element={<PrivateRoute roles={['ROLE_ADMIN', 'ROLE_VIGILANTE']}><ClientHome /></PrivateRoute>}>
                         <Route index element={<Catalog />} />
                         <Route path="itemlosts" element={<ItemlostListing />} />
-                        <Route path="itemlosts/create" element={<ItemLostForm />} />
                         <Route path="itemlosts/:itemlostId" element={<ItemLostForm />} />
                         <Route path="itemlost-details/:itemlostId" element={<ItemLostDetails />} />
                         <Route path="itemlosts/:itemlostId/deliver" element={<DeliverForm />} />

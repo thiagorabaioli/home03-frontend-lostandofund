@@ -1,4 +1,4 @@
-// thiagorabaioli/frontend-lostandofund/frontend-lostandofund-1eb8ffea46adda1de78a07b005611f8d29e3b159/src/components/HeaderAdmin/index.tsx
+
 import './styles.css';
 import homeIcon from '../../assets/home.svg';
 import LoggedUser from '../LoggedUser';

@@ -86,7 +86,7 @@ export default function ItemLostForm() {
 
         request
             .then(() => {
-                navigate("/admin/itemlosts");
+                navigate("/client/itemlosts"); // Alterado de /admin/itemlosts
             })
             .catch(error => {
                 const newInputs = forms.setBackendErrors(formData, error.response.data.errors);

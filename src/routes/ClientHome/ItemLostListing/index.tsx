@@ -49,7 +49,7 @@ export default function ItemlostListing() {
     }, [queryParams]);
 
     function handleNewProductClick() {
-        navigate("/admin/itemlosts/create");
+      navigate("/client/itemlosts/create"); // Alterado de /admin para /client
     }
 
     function handleSearch(searchText: string) {
@@ -66,8 +66,8 @@ export default function ItemlostListing() {
     }
 
     function handleUpdateClick(itemlostId: number) {
-        navigate(`/admin/itemlosts/${itemlostId}`);
-    }
+      navigate(`/client/itemlosts/${itemlostId}`); // Alterado de /admin para /client
+     } 
 
     // As funções handleDeleteClick e handleDialogConfirmationAnswer já não são necessárias
     /*
@@ -94,7 +94,7 @@ export default function ItemlostListing() {
     */
 
     function handleDeliverClick(itemlostId: number) {
-        navigate(`/admin/itemlosts/${itemlostId}/deliver`);
+     navigate(`/client/itemlosts/${itemlostId}/deliver`); // Alterado de /admin para /client
     }
 
     return (
