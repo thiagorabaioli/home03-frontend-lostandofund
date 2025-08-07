@@ -13,10 +13,9 @@ export default function CatalogCard({ itemlost }: Props) {
 
     const { contextTokenPayload } = useContext(ContextToken);
 
-    // Determina o destino do link com base na role do utilizador
-    const destination = (contextTokenPayload && authService.hasAnyRoles(['ROLE_ADMIN', 'ROLE_VIGILANTE']))
-        ? `/admin/itemlosts/${itemlost.id}/deliver`
-        : `/itemlost-details/${itemlost.id}`;
+        const destination = (contextTokenPayload && authService.hasAnyRoles(['ROLE_ADMIN', 'ROLE_VIGILANTE']))
+    ? `/client/itemlost-details/${itemlost.id}`
+    : '#';
 
     return (
         <Link to={destination}>
