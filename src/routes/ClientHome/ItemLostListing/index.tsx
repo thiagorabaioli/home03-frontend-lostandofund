@@ -69,29 +69,6 @@ export default function ItemlostListing() {
       navigate(`/client/itemlosts/${itemlostId}`); // Alterado de /admin para /client
      } 
 
-    // As funções handleDeleteClick e handleDialogConfirmationAnswer já não são necessárias
-    /*
-    function handleDeleteClick(productId: number) {
-        setDialogConfirmationData({ ...dialogConfirmationData, id: productId, visible: true });
-    }
-
-    function handleDialogConfirmationAnswer(answer: boolean, productId: number) {
-        if (answer) {
-            itemLostService.deleteById(productId)
-                .then(() => {
-                    setItemLost([]);
-                    setQueryParam({ ...queryParams, page: 0 });
-                })
-                .catch(error => {
-                    setDialogInfoData({
-                        visible: true,
-                        message: error.response.data.error
-                    })
-                });
-        }
-        setDialogConfirmationData({ ...dialogConfirmationData, visible: false });
-    }
-    */
 
     function handleDeliverClick(itemlostId: number) {
      navigate(`/client/itemlosts/${itemlostId}/deliver`); // Alterado de /admin para /client

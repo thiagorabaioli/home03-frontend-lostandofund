@@ -17,7 +17,8 @@ import ItemLostForm from './routes/ClientHome/ItemLostForm';
 import ItemLostDetails from './routes/ClientHome/ItemLostDetails';
 import DeliverForm from './routes/ClientHome/DeliveryForm';
 import PublicCatalog from './routes/ClientHome/PublicCatalog';
-import Footer from './components/Footer'; // 1. IMPORTE O NOVO COMPONENTE
+import Footer from './components/Footer'; 
+import DeliveredItemsListing from './routes/ClientHome/DeliveredItemsListing'; 
 
 export default function App() {
 
@@ -44,6 +45,7 @@ export default function App() {
                   <Route path="/client/" element={<PrivateRoute roles={['ROLE_ADMIN', 'ROLE_VIGILANTE']}><ClientHome /></PrivateRoute>}>
                         <Route index element={<Catalog />} />
                         <Route path="itemlosts" element={<ItemlostListing />} />
+                         <Route path="delivered-items" element={<DeliveredItemsListing />} /> {/* Adicione esta linha */}
                         <Route path="itemlosts/:itemlostId" element={<ItemLostForm />} />
                         <Route path="itemlost-details/:itemlostId" element={<ItemLostDetails />} />
                         <Route path="itemlosts/:itemlostId/deliver" element={<DeliverForm />} />

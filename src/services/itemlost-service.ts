@@ -70,3 +70,12 @@ export function findPublicItems() {
     }
     return requestBackend(config);
 }
+
+export function findDeliveredItemsRequest() {
+    const config: AxiosRequestConfig = {
+        method: "GET",
+        url: "/itemlosts/delivered",
+        withCredentials: true,
+    };
+    return requestBackend(config);
+}

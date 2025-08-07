@@ -8,6 +8,7 @@ import * as authService from '../../services/auth-service';
 import { useContext } from 'react';
 import { ContextToken } from '../../utils/context-token';
 import LoggedUser from '../LoggedUser';
+import deliveredIcon from '../../assets/deliver.svg'; 
 
 export default function HeaderClient() {
 
@@ -33,6 +34,12 @@ export default function HeaderClient() {
                                 <Link to="/client/itemlosts/create">
                                     <div className="dsc-menu-item">
                                         <img src={addIcon} alt="Adicionar Item" />
+                                    </div>
+                                </Link>
+                                 <Link to="/client/delivered-items">
+                                    <div className="dsc-menu-item">
+                                        <img src={deliveredIcon} alt="Itens Entregues" />
+                                        <p>Entregues</p>
                                     </div>
                                 </Link>
                                 <Link to="/admin">
