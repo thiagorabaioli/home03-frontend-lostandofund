@@ -1,3 +1,4 @@
+
 import './styles.css';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -59,6 +60,11 @@ export default function DeliverForm() {
         setFormData(forms.updateAndValidate(formData, event.target.name, event.target.value));
     }
 
+    // ADICIONE ESTA FUNÇÃO
+    function handleTurnDirty(name: string) {
+        setFormData(forms.dirtyAndValidate(formData, name));
+    }
+
     function handleSubmit(event: any) {
         event.preventDefault();
 
@@ -92,8 +98,7 @@ export default function DeliverForm() {
                                     {...formData.name}
                                     className="dsc-form-control"
                                     onChange={handleInputChange}
-                                    data-dirty={formData.name.dirty}
-                                    data-invalid={formData.name.invalid}
+                                    onTurnDirty={handleTurnDirty} // ADICIONE ESTA LINHA
                                 />
                                 <div className="dsc-form-error">{formData.name.message}</div>
                             </div>
@@ -102,16 +107,25 @@ export default function DeliverForm() {
                                     {...formData.email}
                                     className="dsc-form-control"
                                     onChange={handleInputChange}
-                                    data-dirty={formData.email.dirty}
-                                    data-invalid={formData.email.invalid}
+                                    onTurnDirty={handleTurnDirty} // ADICIONE ESTA LINHA
                                 />
                                 <div className="dsc-form-error">{formData.email.message}</div>
                             </div>
                             <div>
-                                <FormInput {...formData.contact} className="dsc-form-control" onChange={handleInputChange} />
+                                <FormInput 
+                                    {...formData.contact} 
+                                    className="dsc-form-control" 
+                                    onChange={handleInputChange} 
+                                    onTurnDirty={handleTurnDirty} // ADICIONE ESTA LINHA
+                                />
                             </div>
                             <div>
-                                <FormInput {...formData.location} className="dsc-form-control" onChange={handleInputChange} />
+                                <FormInput 
+                                    {...formData.location} 
+                                    className="dsc-form-control" 
+                                    onChange={handleInputChange} 
+                                    onTurnDirty={handleTurnDirty} // ADICIONE ESTA LINHA
+                                />
                             </div>
                         </div>
 

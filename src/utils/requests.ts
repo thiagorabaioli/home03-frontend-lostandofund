@@ -37,7 +37,7 @@ axios.interceptors.response.use(
       history.push("/login");
     }
     if (error.response.status === 403) {
-      history.push("/catalog");
+      history.push("/public-catalog");
     }
     return Promise.reject(error);
   }
