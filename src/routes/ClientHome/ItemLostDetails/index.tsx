@@ -26,9 +26,10 @@ export default function ItemLostDetails() {
       });
   }, [params.itemlostId]);
 
-  function handleDeliverClick() {
-    navigate(`/admin/itemlosts/${params.itemlostId}/deliver`);
-  }
+ // thiagorabaioli/frontend-lostandofund/frontend-lostandofund-1eb8ffea46adda1de78a07b005611f8d29e3b159/src/routes/ClientHome/ItemLostDetails/index.tsx
+          function handleDeliverClick() {
+            navigate(`/client/itemlosts/${params.itemlostId}/deliver`);
+          }
 
   return (
     <main>

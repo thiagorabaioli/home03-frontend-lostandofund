@@ -39,17 +39,17 @@ export default function App() {
                   </Route>
                   
                   <Route path="/client/" element={<PrivateRoute roles={['ROLE_ADMIN', 'ROLE_VIGILANTE']}><ClientHome /></PrivateRoute>}>
-                        <Route index element={<Catalog />} />
-                        <Route path="itemlost-details/:itemlostId" element={<ItemLostDetails />} />
-                  </Route>
-
-                  <Route path="/admin/" element={<PrivateRoute roles={['ROLE_ADMIN', 'ROLE_VIGILANTE']}><Admin /></PrivateRoute>}>
-                      <Route index element={<Navigate to="/admin/home" />} />
-                      <Route path="home" element={<AdminHome />} />
-                      <Route path="itemlosts" element={<ItemlostListing />} />
-                      <Route path="itemlosts/:itemlostId" element={<ItemLostForm />} />
+                      <Route index element={<Catalog />} />
+                      <Route path="itemlost-details/:itemlostId" element={<ItemLostDetails />} />
                       <Route path="itemlosts/:itemlostId/deliver" element={<DeliverForm />} />
-                  </Route>
+                   </Route>
+
+                 <Route path="/admin/" element={<PrivateRoute roles={['ROLE_ADMIN', 'ROLE_VIGILANTE']}><Admin /></PrivateRoute>}>
+                    <Route index element={<Navigate to="/admin/home" />} />
+                    <Route path="home" element={<AdminHome />} />
+                    <Route path="itemlosts" element={<ItemlostListing />} />
+                    <Route path="itemlosts/:itemlostId" element={<ItemLostForm />} />
+                 </Route>
 
                   <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
