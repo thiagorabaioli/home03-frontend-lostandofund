@@ -1,4 +1,3 @@
-
 import './styles.css';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -29,9 +28,8 @@ export default function DeliverForm() {
             id: "email",
             name: "email",
             type: "email",
-            placeholder: "Email de quem recebe",
-            validation: (value: string) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value),
-            message: "Email inválido"
+            placeholder: "Email de quem recebe (opcional)",
+            // A validação foi removida daqui
         },
         contact: {
             value: "",
@@ -60,7 +58,6 @@ export default function DeliverForm() {
         setFormData(forms.updateAndValidate(formData, event.target.name, event.target.value));
     }
 
-    // ADICIONE ESTA FUNÇÃO
     function handleTurnDirty(name: string) {
         setFormData(forms.dirtyAndValidate(formData, name));
     }
@@ -98,7 +95,7 @@ export default function DeliverForm() {
                                     {...formData.name}
                                     className="dsc-form-control"
                                     onChange={handleInputChange}
-                                    onTurnDirty={handleTurnDirty} // ADICIONE ESTA LINHA
+                                    onTurnDirty={handleTurnDirty}
                                 />
                                 <div className="dsc-form-error">{formData.name.message}</div>
                             </div>
@@ -107,16 +104,16 @@ export default function DeliverForm() {
                                     {...formData.email}
                                     className="dsc-form-control"
                                     onChange={handleInputChange}
-                                    onTurnDirty={handleTurnDirty} // ADICIONE ESTA LINHA
+                                    onTurnDirty={handleTurnDirty}
                                 />
-                                <div className="dsc-form-error">{formData.email.message}</div>
+                                {/* Não há mensagem de erro porque o campo é opcional */}
                             </div>
                             <div>
                                 <FormInput 
                                     {...formData.contact} 
                                     className="dsc-form-control" 
                                     onChange={handleInputChange} 
-                                    onTurnDirty={handleTurnDirty} // ADICIONE ESTA LINHA
+                                    onTurnDirty={handleTurnDirty}
                                 />
                             </div>
                             <div>
@@ -124,7 +121,7 @@ export default function DeliverForm() {
                                     {...formData.location} 
                                     className="dsc-form-control" 
                                     onChange={handleInputChange} 
-                                    onTurnDirty={handleTurnDirty} // ADICIONE ESTA LINHA
+                                    onTurnDirty={handleTurnDirty}
                                 />
                             </div>
                         </div>
