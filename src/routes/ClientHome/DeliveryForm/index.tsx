@@ -6,6 +6,27 @@ import * as forms from '../../../utils/forms';
 import * as itemlostService from '../../../services/itemlost-service';
 import { ItemLostDTO } from '../../../models/itemlosts';
 
+// Estilo para a checkbox e o seu texto
+const checkboxStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    marginBottom: '10px',
+    marginTop: '10px'
+};
+
+const checkboxLabelStyle = {
+    marginLeft: '10px',
+    fontSize: '12px',
+    color: 'var(--dsc-color-font-primary)'
+};
+
+const checkboxErrorStyle = {
+    color: 'var(--dsc-color-error)',
+    fontSize: '12px',
+    paddingLeft: '4px',
+};
+
+
 export default function DeliverForm() {
 
     const params = useParams();
@@ -15,35 +36,28 @@ export default function DeliverForm() {
 
     const [formData, setFormData] = useState<any>({
         name: {
-            value: "",
-            id: "name",
-            name: "name",
-            type: "text",
-            placeholder: "Nome de quem recebe",
+            value: "", id: "name", name: "name", type: "text", placeholder: "Nome de quem recebe",
             validation: (value: string) => value.length >= 3,
             message: "O nome deve ter pelo menos 3 caracteres"
         },
         email: {
-            value: "",
-            id: "email",
-            name: "email",
-            type: "email",
-            placeholder: "Email de quem recebe (opcional)",
-            // A validação foi removida daqui
+            value: "", id: "email", name: "email", type: "email", placeholder: "Email de quem recebe (opcional)",
+            validation: (value: string) => value === "" || /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value),
+            message: "Email inválido"
         },
         contact: {
-            value: "",
-            id: "contact",
-            name: "contact",
-            type: "text",
-            placeholder: "Contacto",
+            value: "", id: "contact", name: "contact", type: "text", placeholder: "Contacto",
         },
         location: {
-            value: "",
-            id: "location",
-            name: "location",
-            type: "text",
-            placeholder: "Morada",
+            value: "", id: "location", name: "location", type: "text", placeholder: "Morada",
+            validation: (value: string) => value.length >= 3,
+            message: "A morada deve ter pelo menos 3 caracteres"
+        },
+        // NOVO CAMPO PARA A CHECKBOX
+        conditionAccepted: {
+            value: false, id: "conditionAccepted", name: "conditionAccepted", type: "checkbox",
+            validation: (value: boolean) => value === true,
+            message: "É necessário aceitar as condições"
         }
     });
 
@@ -55,7 +69,9 @@ export default function DeliverForm() {
     }, [params.itemlostId]);
 
     function handleInputChange(event: any) {
-        setFormData(forms.updateAndValidate(formData, event.target.name, event.target.value));
+        const { name, value, type, checked } = event.target;
+        const newValue = type === 'checkbox' ? checked : value;
+        setFormData(forms.updateAndValidate(formData, name, newValue));
     }
 
     function handleTurnDirty(name: string) {
@@ -74,11 +90,9 @@ export default function DeliverForm() {
         const requestBody = forms.toValues(formData);
         itemlostService.deliverRequest(Number(params.itemlostId), requestBody)
             .then(() => {
-              
                 navigate("/client");
             })
             .catch(() => {
-              
                 navigate("/client");
             });
     }
@@ -90,49 +104,59 @@ export default function DeliverForm() {
                     <form className="dsc-card dsc-form" onSubmit={handleSubmit}>
                         <h2>Entrega do item: {item?.description}</h2>
                         <div className="dsc-form-controls-container">
+                            {/* ... outros inputs ... */}
                             <div>
                                 <FormInput
-                                    {...formData.name}
-                                    className="dsc-form-control"
-                                    onChange={handleInputChange}
-                                    onTurnDirty={handleTurnDirty}
+                                    {...formData.name} className="dsc-form-control"
+                                    onChange={handleInputChange} onTurnDirty={handleTurnDirty}
                                 />
                                 <div className="dsc-form-error">{formData.name.message}</div>
                             </div>
                             <div>
                                 <FormInput
-                                    {...formData.email}
-                                    className="dsc-form-control"
+                                    {...formData.email} className="dsc-form-control"
+                                    onChange={handleInputChange} onTurnDirty={handleTurnDirty}
+                                />
+                                <div className="dsc-form-error">{formData.email.message}</div>
+                            </div>
+                            <div>
+                                <FormInput 
+                                    {...formData.contact} className="dsc-form-control"
+                                    onChange={handleInputChange} onTurnDirty={handleTurnDirty}
+                                />
+                            </div>
+                            <div>
+                                <FormInput 
+                                    {...formData.location} className="dsc-form-control"
+                                    onChange={handleInputChange} onTurnDirty={handleTurnDirty}
+                                />
+                                <div className="dsc-form-error">{formData.location.message}</div>
+                            </div>
+
+                            {/* CHECKBOX ADICIONADA AQUI */}
+                            <div style={checkboxStyle}>
+                                <FormInput
+                                    {...formData.conditionAccepted}
                                     onChange={handleInputChange}
                                     onTurnDirty={handleTurnDirty}
                                 />
-                                {/* Não há mensagem de erro porque o campo é opcional */}
+                                <label htmlFor="conditionAccepted" style={checkboxLabelStyle}>
+                                    Confirmo que estou a receber o item nas mesmas condições (ou em condições aceitáveis) em que o perdi.
+                                </label>
                             </div>
-                            <div>
-                                <FormInput 
-                                    {...formData.contact} 
-                                    className="dsc-form-control" 
-                                    onChange={handleInputChange} 
-                                    onTurnDirty={handleTurnDirty}
-                                />
-                            </div>
-                            <div>
-                                <FormInput 
-                                    {...formData.location} 
-                                    className="dsc-form-control" 
-                                    onChange={handleInputChange} 
-                                    onTurnDirty={handleTurnDirty}
-                                />
-                            </div>
-                        </div>
+                            {/* MENSAGEM DE ERRO PARA A CHECKBOX */}
+                             {formData.conditionAccepted.dirty === 'true' && formData.conditionAccepted.invalid === 'true' && (
+                                <div style={checkboxErrorStyle}>{formData.conditionAccepted.message}</div>
+                            )}
 
-                         <div className="dsc-deliver-form-buttons">
-                                <Link to="/client">
+                        </div>
+                        <div className="dsc-deliver-form-buttons">
+                            <Link to="/client">
                                 <button type="reset" className="dsc-btn dsc-btn-white">Cancelar</button>
-                                </Link>
-                                <button type="submit" className="dsc-btn dsc-btn-blue">Confirmar Entrega</button>
-                         </div>
-                        </form>
+                            </Link>
+                            <button type="submit" className="dsc-btn dsc-btn-blue">Confirmar Entrega</button>
+                        </div>
+                    </form>
                 </div>
             </section>
         </main>

@@ -25,13 +25,6 @@ export default function ItemlostListing() {
         message: "Operação com sucesso!"
     });
 
-    // A lógica de confirmação de apagar pode ser removida
-    // const [dialogConfirmationData, setDialogConfirmationData] = useState({
-    //     visible: false,
-    //     id: 0,
-    //     message: "Tem certeza?"
-    // });
-
     const [isLastPage, setIsLastPage] = useState(false);
     const [itemlost, setItemLost] = useState<ItemLostDTO[]>([]);
     const [queryParams, setQueryParam] = useState<QueryParams>({
@@ -40,7 +33,8 @@ export default function ItemlostListing() {
     });
 
     useEffect(() => {
-        itemLostService.findPageRequest(queryParams.page, queryParams.name, 12, "id")
+        // A ALTERAÇÃO ESTÁ AQUI: o último parâmetro agora é "id,desc"
+        itemLostService.findPageRequest(queryParams.page, queryParams.name, 12, "id,desc")
             .then(response => {
                 const nextPage = response.data.content;
                 setItemLost(queryParams.page === 0 ? nextPage : itemlost.concat(nextPage));
@@ -49,7 +43,7 @@ export default function ItemlostListing() {
     }, [queryParams]);
 
     function handleNewProductClick() {
-      navigate("/client/itemlosts/create"); // Alterado de /admin para /client
+      navigate("/client/itemlosts/create");
     }
 
     function handleSearch(searchText: string) {
@@ -66,12 +60,12 @@ export default function ItemlostListing() {
     }
 
     function handleUpdateClick(itemlostId: number) {
-      navigate(`/client/itemlosts/${itemlostId}`); // Alterado de /admin para /client
+      navigate(`/client/itemlosts/${itemlostId}`);
      } 
 
 
     function handleDeliverClick(itemlostId: number) {
-     navigate(`/client/itemlosts/${itemlostId}/deliver`); // Alterado de /admin para /client
+     navigate(`/client/itemlosts/${itemlostId}/deliver`);
     }
 
     return (
@@ -97,7 +91,6 @@ export default function ItemlostListing() {
                             <th className="dsc-tb768">Status</th>
                             <th></th>
                             <th></th>
-                            {/* Coluna do ícone de apagar removida */}
                         </tr>
                     </thead>
                     <tbody>
@@ -113,7 +106,6 @@ export default function ItemlostListing() {
                                         {item.status && <div onClick={() => handleDeliverClick(item.id)} className="dsc-product-listing-btn">Entregar</div>}
                                     </td>
                                     <td><img onClick={() => handleUpdateClick(item.id)} className="dsc-product-listing-btn" src={editIcon} alt="Editar" /></td>
-                                    {/* Célula com o ícone de apagar removida */}
                                 </tr>
                             ))
                         }
@@ -133,8 +125,6 @@ export default function ItemlostListing() {
                     onDialogClose={handleDialogInfoClose}
                 />
             }
-
-            { /* O DialogConfirmation já não é necessário */ }
         </main>
     );
 }

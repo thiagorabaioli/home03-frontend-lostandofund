@@ -3,4 +3,5 @@ export type OwnerDTO = {
     email: string;
     contact: string;
     location: string;
+    conditionAccepted: boolean; // NOVO CAMPO
 }

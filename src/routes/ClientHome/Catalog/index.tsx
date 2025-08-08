@@ -21,7 +21,7 @@ export default function Catalog() {
     });
 
     useEffect(() => {
-        ItemLostService.findPageRequest(queryParams.page, queryParams.name)
+        ItemLostService.findPageRequest(queryParams.page, queryParams.name, 12, "id,desc")
             .then(response => {
                 // CORREÇÃO AQUI: Filtramos a resposta para manter apenas itens com status = true
                 const newItems = response.data.content.filter((item: ItemLostDTO) => item.status === true);
