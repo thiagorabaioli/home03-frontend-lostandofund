@@ -19,6 +19,8 @@ import DeliverForm from './routes/ClientHome/DeliveryForm';
 import PublicCatalog from './routes/ClientHome/PublicCatalog';
 import Footer from './components/Footer'; 
 import DeliveredItemsListing from './routes/ClientHome/DeliveredItemsListing'; 
+import UserListing from './routes/Admin/UserListing';
+import UserForm from './routes/Admin/UserForm';
 
 export default function App() {
 
@@ -51,10 +53,14 @@ export default function App() {
                         <Route path="itemlosts/:itemlostId/deliver" element={<DeliverForm />} />
                    </Route>
 
-                 <Route path="/admin/" element={<PrivateRoute roles={['ROLE_ADMIN']}><Admin /></PrivateRoute>}>
-                    <Route index element={<Navigate to="/admin/home" />} />
-                    <Route path="home" element={<AdminHome />} />
-                 </Route>
+                   <Route path="/admin/" element={<PrivateRoute roles={['ROLE_ADMIN']}><Admin /></PrivateRoute>}>
+                      <Route index element={<Navigate to="/admin/home" />} />
+                      <Route path="home" element={<AdminHome />} />
+                      {/* ADICIONAR ESTAS ROTAS */}
+                      <Route path="users" element={<UserListing />} />
+                      <Route path="users/create" element={<UserForm />} />
+                      <Route path="users/:userId" element={<UserForm />} />
+                    </Route>
 
                   <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
