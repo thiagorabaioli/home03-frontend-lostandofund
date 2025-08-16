@@ -1,7 +1,18 @@
 .dsc-catalog-card-top {
   display: flex;
   justify-content: center;
-  padding: 10px;
+  padding: 25px 10px 10px 10px; /* Adicionado mais espaço no topo */
+  position: relative; /* Necessário para posicionar o ID */
+}
+
+/* Novo estilo para o ID/Ano */
+.dsc-catalog-card-id {
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--dsc-color-font-primary);
 }
 
 .dsc-catalog-card-top img {
@@ -11,7 +22,7 @@
 
 .dsc-catalog-card-bottom {
   padding: 10px 20px;
-  min-height: 110px;
+  min-height: 130px;
 }
 
 .dsc-catalog-card-bottom h3 {

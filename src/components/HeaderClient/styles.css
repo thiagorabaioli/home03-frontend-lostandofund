@@ -2,3 +2,9 @@
   background-color: var(--dsc-color-bg-secondary);
   color: var(--dsc-color-font-primary);
 }
+
+.dsc-logo {
+    margin-right: 10px;
+    width: 30px; 
+    height: 30px; 
+}

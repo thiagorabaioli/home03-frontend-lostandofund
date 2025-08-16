@@ -2,3 +2,11 @@
   background-color: var(--dsc-color-bg-quaternary);
   color: var(--dsc-color-font-tertiary);
 }
+
+.dsc-logo {
+    margin-right: 10px;
+    width: 30px; 
+    height: 30px; 
+}
+
+

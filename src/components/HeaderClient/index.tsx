@@ -1,14 +1,14 @@
-
 import './styles.css';
 import { Link } from 'react-router-dom';
 import iconAdmin from '../../assets/admin.svg';
-import addIcon from '../../assets/add.svg'; // Importa o novo ícone
-import homeIcon from '../../assets/home.svg'; // Importa o novo ícone
+import addIcon from '../../assets/add.svg';
+import homeIcon from '../../assets/home.svg';
 import * as authService from '../../services/auth-service';
 import { useContext } from 'react';
 import { ContextToken } from '../../utils/context-token';
 import LoggedUser from '../LoggedUser';
-import deliveredIcon from '../../assets/deliver.svg'; 
+import deliveredIcon from '../../assets/deliver.svg';
+import logo from '../../assets/logo.svg';
 
 export default function HeaderClient() {
 
@@ -17,7 +17,8 @@ export default function HeaderClient() {
     return (
         <header className="dsc-header-client">
             <nav className="dsc-container">
-                <Link to="/">
+                <Link to="/" className="dsc-logo-container">
+                    <img src={logo} alt="Logo" className="dsc-logo" />
                     <h1>Lost and Found WEB APP</h1>
                 </Link>
                 <div className="dsc-navbar-right">

@@ -88,6 +88,19 @@ header {
   padding: 0 20px;
 }
 
+.dsc-logo-container {
+    display: flex;
+    align-items: center;
+}
+
+/* Estilo para a imagem do logo */
+.dsc-logo {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+/* Garante que a tag nav usa flexbox para alinhar os itens */
 nav {
   display: flex;
   justify-content: space-between;
