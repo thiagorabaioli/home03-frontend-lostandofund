@@ -33,6 +33,9 @@ export default function DeliverForm() {
     const navigate = useNavigate();
 
     const [item, setItem] = useState<ItemLostDTO>();
+    
+    // 1. Adicionar o estado de carregamento
+    const [isLoading, setIsLoading] = useState(false);
 
     const [formData, setFormData] = useState<any>({
         name: {
@@ -53,7 +56,6 @@ export default function DeliverForm() {
             validation: (value: string) => value.length >= 3,
             message: "A morada deve ter pelo menos 3 caracteres"
         },
-        // NOVO CAMPO PARA A CHECKBOX
         conditionAccepted: {
             value: false, id: "conditionAccepted", name: "conditionAccepted", type: "checkbox",
             validation: (value: boolean) => value === true,
@@ -87,6 +89,9 @@ export default function DeliverForm() {
             return;
         }
 
+        // 2. Ativar o carregamento antes do pedido
+        setIsLoading(true); 
+
         const requestBody = forms.toValues(formData);
         itemlostService.deliverRequest(Number(params.itemlostId), requestBody)
             .then(() => {
@@ -94,6 +99,10 @@ export default function DeliverForm() {
             })
             .catch(() => {
                 navigate("/client");
+            })
+            .finally(() => {
+                // 3. Desativar o carregamento no final do pedido
+                setIsLoading(false); 
             });
     }
 
@@ -104,7 +113,7 @@ export default function DeliverForm() {
                     <form className="dsc-card dsc-form" onSubmit={handleSubmit}>
                         <h2>Entrega do item: {item?.description}</h2>
                         <div className="dsc-form-controls-container">
-                            {/* ... outros inputs ... */}
+                         
                             <div>
                                 <FormInput
                                     {...formData.name} className="dsc-form-control"
@@ -132,8 +141,6 @@ export default function DeliverForm() {
                                 />
                                 <div className="dsc-form-error">{formData.location.message}</div>
                             </div>
-
-                            {/* CHECKBOX ADICIONADA AQUI */}
                             <div style={checkboxStyle}>
                                 <FormInput
                                     {...formData.conditionAccepted}
@@ -144,7 +151,6 @@ export default function DeliverForm() {
                                     Confirmo que estou a receber o item nas mesmas condições (ou em condições aceitáveis) em que o perdi.
                                 </label>
                             </div>
-                            {/* MENSAGEM DE ERRO PARA A CHECKBOX */}
                              {formData.conditionAccepted.dirty === 'true' && formData.conditionAccepted.invalid === 'true' && (
                                 <div style={checkboxErrorStyle}>{formData.conditionAccepted.message}</div>
                             )}
@@ -154,7 +160,10 @@ export default function DeliverForm() {
                             <Link to="/client">
                                 <button type="reset" className="dsc-btn dsc-btn-white">Cancelar</button>
                             </Link>
-                            <button type="submit" className="dsc-btn dsc-btn-blue">Confirmar Entrega</button>
+                            
+                            <button type="submit" className="dsc-btn dsc-btn-blue" disabled={isLoading}>
+                                {isLoading ? "A confirmar..." : "Confirmar Entrega"}
+                            </button>
                         </div>
                     </form>
                 </div>
