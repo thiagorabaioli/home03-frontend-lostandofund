@@ -79,3 +79,17 @@ export function findDeliveredItemsRequest() {
     };
     return requestBackend(config);
 }
+
+// NOVA FUNÇÃO PARA ENTREGA EM LOTE
+export function deliverItemsInBatchRequest(centerName: string, itemIds: number[]) {
+    const config: AxiosRequestConfig = {
+        method: "POST",
+        url: "/itemlosts/deliver-batch",
+        withCredentials: true,
+        data: {
+            centerName,
+            itemIds
+        }
+    };
+    return requestBackend(config);
+}
