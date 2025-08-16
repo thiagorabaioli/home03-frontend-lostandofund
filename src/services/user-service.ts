@@ -2,6 +2,7 @@ import { AxiosRequestConfig } from "axios";
 import { requestBackend } from "../utils/requests";
 import { UserCrudDTO } from "../models/user-crud";
 
+
 export function findMe() {
 
     const config : AxiosRequestConfig = {
@@ -32,6 +33,32 @@ export function insertUser(user: UserCrudDTO) {
         url: "/userapp",
         withCredentials: true,
         data: user,
+    };
+    return requestBackend(config);
+}
+export function findById(id: number) {
+    const config: AxiosRequestConfig = {
+        url: `/userapp/${id}`,
+        withCredentials: true,
+    };
+    return requestBackend(config);
+}
+
+export function updateUser(id: number, user: UserCrudDTO) {
+    const config: AxiosRequestConfig = {
+        method: "PUT",
+        url: `/userapp/${id}`,
+        withCredentials: true,
+        data: user,
+    };
+    return requestBackend(config);
+}
+
+export function deleteById(id: number) {
+    const config: AxiosRequestConfig = {
+        method: "DELETE",
+        url: `/userapp/${id}`,
+        withCredentials: true,
     };
     return requestBackend(config);
 }
