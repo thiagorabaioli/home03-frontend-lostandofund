@@ -1,14 +1,14 @@
-#user-form-section {
+#user-create-section {
   padding: 40px 0;
 }
 
-.dsc-user-form-container {
+.dsc-form-container {
   width: 100%;
   max-width: 500px;
   margin: 0 auto;
 }
 
-.dsc-user-form-buttons {
+.dsc-form-buttons {
   width: 100%;
   display: grid;
   grid-gap: 20px;

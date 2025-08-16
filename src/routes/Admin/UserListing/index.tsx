@@ -5,13 +5,12 @@ import { UserCrudDTO } from '../../../models/user-crud';
 import * as userService from '../../../services/user-service';
 import ButtonInverse from '../../../components/ButtonInverse';
 import ButtonNextPage from '../../../components/ButtonNextPage';
-import DialogConfirmation from '../../../components/DialogConfirmation'; // IMPORTAR
-import editIcon from '../../../assets/edit.svg'; // IMPORTAR ÍCONE
-import deleteIcon from '../../../assets/delete.svg'; // IMPORTAR ÍCONE
+import DialogConfirmation from '../../../components/DialogConfirmation';
+import editIcon from '../../../assets/edit.svg';
+import deleteIcon from '../../../assets/delete.svg';
 
 type QueryParams = {
     page: number;
-    // Adicionado para forçar a atualização após a exclusão
     reload: boolean; 
 }
 
@@ -21,7 +20,6 @@ export default function UserListing() {
     const [isLastPage, setIsLastPage] = useState(false);
     const [users, setUsers] = useState<UserCrudDTO[]>([]);
     
-    // ESTADO PARA O DIÁLOGO DE CONFIRMAÇÃO
     const [dialogConfirmationData, setDialogConfirmationData] = useState({
         visible: false,
         id: 0,
@@ -50,7 +48,6 @@ export default function UserListing() {
         setQueryParams({ ...queryParams, page: queryParams.page + 1 });
     }
 
-    // FUNÇÕES PARA OS BOTÕES DE AÇÃO
     function handleUpdateClick(userId: number) {
         navigate(`/admin/users/${userId}`);
     }
@@ -59,16 +56,13 @@ export default function UserListing() {
         setDialogConfirmationData({ ...dialogConfirmationData, visible: true, id: userId });
     }
 
-    // FUNÇÃO PARA LIDAR COM A RESPOSTA DO DIÁLOGO
     function handleDialogConfirmationAnswer(answer: boolean, userId: number) {
         if (answer) {
             userService.deleteById(userId)
                 .then(() => {
-                    // Reinicia a listagem para refletir a exclusão
                     setQueryParams({ page: 0, reload: !queryParams.reload });
                 })
                 .catch(error => {
-                    // Pode adicionar um DialogInfo aqui para mostrar o erro
                     console.error("Erro ao eliminar utilizador:", error);
                 });
         }
@@ -79,7 +73,13 @@ export default function UserListing() {
         <main>
             <section id="user-listing-section" className="dsc-container">
                 <h2 className="dsc-section-title dsc-mb20">Utilizadores</h2>
-                {/* ... (botão Novo Utilizador) ... */}
+
+               
+                <div className="dsc-btn-page-container dsc-mb20">
+                    <div onClick={handleNewUserClick}>
+                        <ButtonInverse text="Novo Utilizador" />
+                    </div>
+                </div>
 
                 <table className="dsc-table dsc-mb20 dsc-mt20">
                     <thead>
@@ -120,10 +120,12 @@ export default function UserListing() {
                     </tbody>
                 </table>
 
-                {/* ... (botão Carregar Mais) ... */}
+                {
+                    !isLastPage &&
+                    <ButtonNextPage onNextPage={handleNextPageClick} />
+                }
             </section>
 
-            {/* RENDERIZAR O DIÁLOGO DE CONFIRMAÇÃO */}
             {
                 dialogConfirmationData.visible &&
                 <DialogConfirmation

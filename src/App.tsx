@@ -20,8 +20,8 @@ import PublicCatalog from './routes/ClientHome/PublicCatalog';
 import Footer from './components/Footer'; 
 import DeliveredItemsListing from './routes/ClientHome/DeliveredItemsListing'; 
 import UserListing from './routes/Admin/UserListing';
-import UserForm from './routes/Admin/UserForm';
-
+import UserCreate from './routes/Admin/UserCreate';
+import UserUpdate from './routes/Admin/UserUpdate';
 export default function App() {
 
   const [contextTokenPayload, setContextTokenPayload] = useState<AccessTokenPayloadDTO>();
@@ -37,7 +37,7 @@ export default function App() {
     <ContextToken.Provider value={{ contextTokenPayload, setContextTokenPayload }}>
       <HistoryRouter history={history}>
                 <Routes>
-                  {/* ... TODAS AS SUAS ROTAS CONTINUAM IGUAIS AQUI ... */}
+                 
                   <Route path="/" element={<ClientHome />}>
                       <Route index element={<Navigate to="/public-catalog" />} />
                       <Route path="public-catalog" element={<PublicCatalog />} />
@@ -47,7 +47,7 @@ export default function App() {
                   <Route path="/client/" element={<PrivateRoute roles={['ROLE_ADMIN', 'ROLE_VIGILANTE']}><ClientHome /></PrivateRoute>}>
                         <Route index element={<Catalog />} />
                         <Route path="itemlosts" element={<ItemlostListing />} />
-                         <Route path="delivered-items" element={<DeliveredItemsListing />} /> {/* Adicione esta linha */}
+                         <Route path="delivered-items" element={<DeliveredItemsListing />} /> 
                         <Route path="itemlosts/:itemlostId" element={<ItemLostForm />} />
                         <Route path="itemlost-details/:itemlostId" element={<ItemLostDetails />} />
                         <Route path="itemlosts/:itemlostId/deliver" element={<DeliverForm />} />
@@ -56,15 +56,15 @@ export default function App() {
                    <Route path="/admin/" element={<PrivateRoute roles={['ROLE_ADMIN']}><Admin /></PrivateRoute>}>
                       <Route index element={<Navigate to="/admin/home" />} />
                       <Route path="home" element={<AdminHome />} />
-                      {/* ADICIONAR ESTAS ROTAS */}
+                    
                       <Route path="users" element={<UserListing />} />
-                      <Route path="users/create" element={<UserForm />} />
-                      <Route path="users/:userId" element={<UserForm />} />
+                      <Route path="users/create" element={<UserCreate />} />
+                     <Route path="users/:userId" element={<UserUpdate />} />
                     </Route>
 
                   <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
-                <Footer /> {/* 2. ADICIONE O COMPONENTE FOOTER AQUI */}
+                <Footer /> 
        </HistoryRouter>
     </ContextToken.Provider>
   );
