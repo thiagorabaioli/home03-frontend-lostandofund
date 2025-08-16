@@ -31,7 +31,7 @@ export default function UserCreate() {
             message: "A senha deve ter pelo menos 6 caracteres"
         },
         birthDate: { value: "", id: "birthDate", name: "birthDate", type: "date", placeholder: "Data de Nascimento" },
-        porNumber: { value: "", id: "porNumber", name: "porNumber", type: "text", placeholder: "Nº Cartão de Cidadão/Passaporte" },
+        porNumber: { value: "", id: "porNumber", name: "porNumber", type: "text", placeholder: "POR Colaborador" },
         role: { value: "ROLE_VIGILANTE", id: "role", name: "role" }
     });
 

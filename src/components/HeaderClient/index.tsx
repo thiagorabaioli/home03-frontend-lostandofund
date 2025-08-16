@@ -1,5 +1,5 @@
 import './styles.css';
-import { Link, NavLink } from 'react-router-dom'; // 1. Importar o NavLink
+import { Link, NavLink } from 'react-router-dom';
 import iconAdmin from '../../assets/admin.svg';
 import addIcon from '../../assets/add.svg';
 import homeIcon from '../../assets/home.svg';
@@ -9,7 +9,7 @@ import { ContextToken } from '../../utils/context-token';
 import LoggedUser from '../LoggedUser';
 import deliveredIcon from '../../assets/deliver.svg';
 import logo from '../../assets/logo.svg';
-import itemsIcon from '../../assets/products.svg'; // 2. Importar o ícone para os itens
+import itemsIcon from '../../assets/products.svg';
 
 export default function HeaderClient() {
 
@@ -35,7 +35,6 @@ export default function HeaderClient() {
                                     </div>
                                   </NavLink>
 
-                                {/* 3. ADICIONAR O NOVO LINK AQUI */}
                                 <NavLink to="/client/itemlosts" className={({isActive}) => isActive ? "dsc-menu-item-active" : ""}>
                                     <div className="dsc-menu-item">
                                         <img src={itemsIcon} alt="Itens Perdidos" />
@@ -55,12 +54,19 @@ export default function HeaderClient() {
                                         <p>Entregues</p>
                                     </div>
                                 </NavLink>
-                                <Link to="/admin">
-                                    <div className="dsc-menu-item">
-                                        <img src={iconAdmin} alt="Admin" />
-                                        <p>Admin</p>
-                                    </div>
-                                </Link>
+                                
+                                {/* --- INÍCIO DA CORREÇÃO --- */}
+                                {/* Adicionada uma verificação específica apenas para ROLE_ADMIN */}
+                                {
+                                    authService.hasAnyRoles(['ROLE_ADMIN']) &&
+                                    <Link to="/admin">
+                                        <div className="dsc-menu-item">
+                                            <img src={iconAdmin} alt="Admin" />
+                                            <p>Admin</p>
+                                        </div>
+                                    </Link>
+                                }
+                                {/* --- FIM DA CORREÇÃO --- */}
                             </>
                         }
                     </div>
