@@ -10,46 +10,39 @@ import DialogInfo from '../../../components/DialogInfo';
 import ButtonInverse from '../../../components/ButtonInverse';
 import { useNavigate } from 'react-router-dom';
 
-// --- NOVO Componente para o Modal de Entrega em Lote ---
+// --- Componente para o Modal de Entrega em Lote ---
 type BatchModalProps = {
     onClose: () => void;
     onSubmit: (payload: BatchDeliveryPayload) => Promise<void>;
-    selectedItems: ItemLostDTO[]; // Recebe os objetos completos
+    selectedItems: ItemLostDTO[];
 };
 
 function BatchDeliverModal({ onClose, onSubmit, selectedItems }: BatchModalProps) {
-    
     const [formData, setFormData] = useState({
         centerName: 'PSP',
         otherCenterName: '',
-        deliveryDate: new Date().toISOString().split('T')[0], // Data de hoje por defeito
+        deliveryDate: new Date().toISOString().split('T')[0],
         termsAccepted: false,
     });
-    
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value, type } = e.target;
-        // Se for checkbox, o valor é 'checked', senão é 'value'
         const inputValue = type === 'checkbox' ? (e.target as HTMLInputElement).checked : value;
         setFormData({ ...formData, [name]: inputValue });
     };
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-        
         if (!formData.termsAccepted) {
             alert("É necessário confirmar o recebimento dos itens.");
             return;
         }
-
         const center = formData.centerName === 'OUTRO' ? formData.otherCenterName : formData.centerName;
-
         if (center.trim().length < 3) {
             alert("O nome do centro de recolha deve ter pelo menos 3 caracteres.");
             return;
         }
-
         setIsSubmitting(true);
         await onSubmit({
             centerName: center,
@@ -65,17 +58,13 @@ function BatchDeliverModal({ onClose, onSubmit, selectedItems }: BatchModalProps
             <div className="dsc-dialog-box" style={{maxWidth: '600px'}} onClick={(e) => e.stopPropagation()}>
                 <form onSubmit={handleSubmit}>
                     <h2>ENTREGA DE ITENS EM LOTE</h2>
-                    
                     <div className="dsc-form-controls-container dsc-mt20 dsc-mb20">
-                        {/* SELECT PARA O CENTRO */}
                         <select name="centerName" value={formData.centerName} onChange={handleInputChange} className="dsc-form-control">
                             <option value="PSP">PSP</option>
                             <option value="GNR">GNR</option>
                             <option value="Centro Comercial">Centro Comercial</option>
                             <option value="OUTRO">Outro</option>
                         </select>
-
-                        {/* INPUT CONDICIONAL PARA 'OUTRO' */}
                         {formData.centerName === 'OUTRO' && (
                             <input
                                 name="otherCenterName"
@@ -86,8 +75,6 @@ function BatchDeliverModal({ onClose, onSubmit, selectedItems }: BatchModalProps
                                 placeholder="Especifique o centro de recolha"
                             />
                         )}
-
-                        {/* DATA DA ENTREGA */}
                         <input
                             name="deliveryDate"
                             value={formData.deliveryDate}
@@ -95,8 +82,6 @@ function BatchDeliverModal({ onClose, onSubmit, selectedItems }: BatchModalProps
                             className="dsc-form-control"
                             type="date"
                         />
-
-                        {/* LISTA DE ITENS */}
                         <div className="dsc-public-list-container" style={{maxHeight: '150px', overflowY: 'auto'}}>
                             <p>Itens a serem entregues:</p>
                             {selectedItems.map(item => (
@@ -105,8 +90,6 @@ function BatchDeliverModal({ onClose, onSubmit, selectedItems }: BatchModalProps
                                 </div>
                             ))}
                         </div>
-                        
-                        {/* CHECKBOX */}
                         <div style={{ display: 'flex', alignItems: 'center' }}>
                             <input
                                 name="termsAccepted"
@@ -120,11 +103,8 @@ function BatchDeliverModal({ onClose, onSubmit, selectedItems }: BatchModalProps
                             </label>
                         </div>
                     </div>
-
                     <div className="dsc-dialog-btn-container">
-                        <button type="button" onClick={onClose} className="dsc-btn dsc-btn-white">
-                            Cancelar
-                        </button>
+                        <button type="button" onClick={onClose} className="dsc-btn dsc-btn-white">Cancelar</button>
                         <button type="submit" className="dsc-btn dsc-btn-blue" disabled={isSubmitting}>
                             {isSubmitting ? "A Entregar..." : "Confirmar Entrega"}
                         </button>
@@ -136,6 +116,11 @@ function BatchDeliverModal({ onClose, onSubmit, selectedItems }: BatchModalProps
 }
 
 // --- Componente principal (ItemlostListing) ---
+type QueryParams = {
+    page: number;
+    name: string;
+}
+
 export default function ItemlostListing() {
     const navigate = useNavigate();
     const [dialogInfoData, setDialogInfoData] = useState({ visible: false, message: "Operação com sucesso!" });
@@ -149,8 +134,8 @@ export default function ItemlostListing() {
         itemLostService.findPageRequest(queryParams.page, queryParams.name, 12, "id,desc")
             .then(response => {
                 const nextPage = response.data.content;
-                const currentItems = queryParams.page === 0 ? nextPage : [...itemlost, ...nextPage];
-                setItemLost(currentItems);
+                // AQUI ESTÁ A CORREÇÃO
+                setItemLost(prevItems => queryParams.page === 0 ? nextPage : [...prevItems, ...nextPage]);
                 setIsLastPage(response.data.last);
             });
     }, [queryParams]);
@@ -187,7 +172,6 @@ export default function ItemlostListing() {
         }
     };
     
-    // Filtra os objetos completos dos itens selecionados para passar ao modal
     const selectedItems = itemlost.filter(item => selectedIds.includes(item.id));
 
     return (
