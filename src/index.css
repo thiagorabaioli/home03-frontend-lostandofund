@@ -430,3 +430,46 @@ nav a {
 .dsc-dialog-btn {
   width: 100%;
 }
+
+/* Adicione estas regras no final do seu ficheiro src/index.css */
+
+@media (max-width: 575px) {
+  /* Ajusta o header para ecrãs pequenos */
+  header {
+    height: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  /* Empilha os elementos da navegação verticalmente */
+  nav {
+    flex-direction: column;
+  }
+
+  /* Centraliza o título e adiciona uma margem inferior */
+  .dsc-logo-container {
+    margin-bottom: 10px;
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* Garante que o texto do título não fique demasiado grande */
+  nav h1 {
+    font-size: 18px;
+  }
+  
+  /* Ajusta o alinhamento dos itens do menu e do utilizador logado */
+  .dsc-navbar-right {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .dsc-menu-items-container {
+    margin-bottom: 10px;
+  }
+
+  /* Centraliza também as informações do utilizador logado */
+  .dsc-logged-user {
+    align-items: center;
+  }
+}
