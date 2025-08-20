@@ -16,40 +16,40 @@ export default function HeaderClient() {
     const { contextTokenPayload } = useContext(ContextToken);
 
     return (
-        <header className="dsc-header-client">
-            <nav className="dsc-container">
-                <Link to="/" className="dsc-logo-container">
-                    <img src={logo} alt="Logo" className="dsc-logo" />
+        <header className="tfr-header-client">
+            <nav className="tfr-container">
+                <Link to="/" className="tfr-logo-container">
+                    <img src={logo} alt="Logo" className="tfr-logo" />
                     <h1>Lost and Found WEB APP</h1>
                 </Link>
-                <div className="dsc-navbar-right">
-                    <div className="dsc-menu-items-container">
+                <div className="tfr-navbar-right">
+                    <div className="tfr-menu-items-container">
                         {
                             contextTokenPayload &&
                             authService.hasAnyRoles(['ROLE_ADMIN', 'ROLE_VIGILANTE']) &&
                             <>
-                                 <NavLink to="/client" end className={({isActive}) => isActive ? "dsc-menu-item-active" : ""}>
-                                    <div className="dsc-menu-item">
+                                 <NavLink to="/client" end className={({isActive}) => isActive ? "tfr-menu-item-active" : ""}>
+                                    <div className="tfr-menu-item">
                                         <img src={homeIcon} alt="Home" />
                                         <p>Início</p>
                                     </div>
                                   </NavLink>
 
-                                <NavLink to="/client/itemlosts" className={({isActive}) => isActive ? "dsc-menu-item-active" : ""}>
-                                    <div className="dsc-menu-item">
+                                <NavLink to="/client/itemlosts" className={({isActive}) => isActive ? "tfr-menu-item-active" : ""}>
+                                    <div className="tfr-menu-item">
                                         <img src={itemsIcon} alt="Itens Perdidos" />
                                         <p>Itens</p>
                                     </div>
                                 </NavLink>
                                 
-                                <NavLink to="/client/itemlosts/create" className={({isActive}) => isActive ? "dsc-menu-item-active" : ""}>
-                                    <div className="dsc-menu-item">
+                                <NavLink to="/client/itemlosts/create" className={({isActive}) => isActive ? "tfr-menu-item-active" : ""}>
+                                    <div className="tfr-menu-item">
                                         <img src={addIcon} alt="Adicionar Item" />
                                         <p>Adicionar</p>
                                     </div>
                                 </NavLink>
-                                <NavLink to="/client/delivered-items" className={({isActive}) => isActive ? "dsc-menu-item-active" : ""}>
-                                    <div className="dsc-menu-item">
+                                <NavLink to="/client/delivered-items" className={({isActive}) => isActive ? "tfr-menu-item-active" : ""}>
+                                    <div className="tfr-menu-item">
                                         <img src={deliveredIcon} alt="Itens Entregues" />
                                         <p>Entregues</p>
                                     </div>
@@ -60,7 +60,7 @@ export default function HeaderClient() {
                                 {
                                     authService.hasAnyRoles(['ROLE_ADMIN']) &&
                                     <Link to="/admin">
-                                        <div className="dsc-menu-item">
+                                        <div className="tfr-menu-item">
                                             <img src={iconAdmin} alt="Admin" />
                                             <p>Admin</p>
                                         </div>

@@ -8,11 +8,11 @@ type Props = {
 export default function ItemLostDetailsCard({ itemlost }: Props) {
 
     return (
-        <div className="dsc-card dsc-mb20">
-            <div className="dsc-product-details-top dsc-line-bottom">
+        <div className="tfr-card tfr-mb20">
+            <div className="tfr-product-details-top tfr-line-bottom">
                 <img src={itemlost.imgUrl} alt={itemlost.description} />
             </div>
-            <div className="dsc-product-details-bottom">
+            <div className="tfr-product-details-bottom">
                 <h3>{itemlost.description}</h3>
                 <h4>Encontrado em: {itemlost.location}</h4>
                 <p>Por: {itemlost.whoFind} na data {new Date(itemlost.foundDate).toLocaleDateString()}</p>

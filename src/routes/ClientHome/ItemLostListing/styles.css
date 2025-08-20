@@ -2,13 +2,13 @@
   padding: 20px 0;
 }
 
-.dsc-product-listing-image {
+.tfr-product-listing-image {
   width: 69px;
   height: 69px;
   display: block;
 }
 
-.dsc-product-listing-btn {
+.tfr-product-listing-btn {
   height: 20px;
   width: auto;
   cursor: pointer;

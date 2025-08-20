@@ -2,13 +2,13 @@
   padding: 20px 0;
 }
 
-.dsc-product-form-container {
+.tfr-product-form-container {
   width: 100%;
   max-width: 500px;
   margin: 0 auto;
 }
 
-.dsc-product-form-buttons {
+.tfr-product-form-buttons {
   width: 100%;
   display: grid;
   grid-gap: 20px;

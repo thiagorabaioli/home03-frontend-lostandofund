@@ -71,22 +71,22 @@ export default function UserListing() {
 
     return (
         <main>
-            <section id="user-listing-section" className="dsc-container">
-                <h2 className="dsc-section-title dsc-mb20">Utilizadores</h2>
+            <section id="user-listing-section" className="tfr-container">
+                <h2 className="tfr-section-title tfr-mb20">Utilizadores</h2>
 
                
-                <div className="dsc-btn-page-container dsc-mb20">
+                <div className="tfr-btn-page-container tfr-mb20">
                     <div onClick={handleNewUserClick}>
                         <ButtonInverse text="Novo Utilizador" />
                     </div>
                 </div>
 
-                <table className="dsc-table dsc-mb20 dsc-mt20">
+                <table className="tfr-table tfr-mb20 tfr-mt20">
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th className="dsc-txt-left">Nome</th>
-                            <th className="dsc-txt-left">Email</th>
+                            <th className="tfr-txt-left">Nome</th>
+                            <th className="tfr-txt-left">Email</th>
                             <th>Papéis</th>
                             <th></th>
                             <th></th>
@@ -96,13 +96,13 @@ export default function UserListing() {
                         {users.map(user => (
                             <tr key={user.id}>
                                 <td>{user.id}</td>
-                                <td className="dsc-txt-left">{user.name}</td>
-                                <td className="dsc-txt-left">{user.email}</td>
+                                <td className="tfr-txt-left">{user.name}</td>
+                                <td className="tfr-txt-left">{user.email}</td>
                                 <td>{user.roles.map(role => role.authority).join(', ')}</td>
                                 <td>
                                     <img 
                                         onClick={() => handleUpdateClick(user.id)} 
-                                        className="dsc-user-listing-btn" 
+                                        className="tfr-user-listing-btn" 
                                         src={editIcon} 
                                         alt="Editar" 
                                     />
@@ -110,7 +110,7 @@ export default function UserListing() {
                                 <td>
                                     <img 
                                         onClick={() => handleDeleteClick(user.id)} 
-                                        className="dsc-user-listing-btn" 
+                                        className="tfr-user-listing-btn" 
                                         src={deleteIcon} 
                                         alt="Eliminar" 
                                     />

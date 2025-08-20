@@ -22,15 +22,15 @@ export default function CatalogCard({ itemlost }: Props) {
 
     return (
         <Link to={destination}>
-            <div className="dsc-card">
-                <div className="dsc-catalog-card-top dsc-line-bottom">
+            <div className="tfr-card">
+                <div className="tfr-catalog-card-top tfr-line-bottom">
                    
-                    <div className="dsc-catalog-card-id">
+                    <div className="tfr-catalog-card-id">
                       ID:  {itemlost.id}/{currentYear}
                     </div>
                     <img src={itemlost.imgUrl} alt={itemlost.description} />
                 </div>
-                <div className="dsc-catalog-card-bottom">
+                <div className="tfr-catalog-card-bottom">
                     <h3>{itemlost.description}</h3>
                     <h4>
                         Encontrado em: {itemlost.location}

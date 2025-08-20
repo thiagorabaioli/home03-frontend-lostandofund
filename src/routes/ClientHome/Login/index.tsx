@@ -67,24 +67,24 @@ export default function Login() {
 
     return (
         <main>
-            <section id="login-section" className="dsc-container">
-                <div className="dsc-login-form-container">
-                    <form className="dsc-card dsc-form" onSubmit={handleSubmit}>
+            <section id="login-section" className="tfr-container">
+                <div className="tfr-login-form-container">
+                    <form className="tfr-card tfr-form" onSubmit={handleSubmit}>
                         <h2>Login</h2>
-                        <div className="dsc-form-controls-container">
+                        <div className="tfr-form-controls-container">
                             <div>
                                 <FormInput
                                     {...formData.username}
-                                    className="dsc-form-control"
+                                    className="tfr-form-control"
                                     onTurnDirty={handleTurnDirty}
                                     onChange={handleInputChange}
                                 />
-                                <div className="dsc-form-error">{formData.username.message}</div>
+                                <div className="tfr-form-error">{formData.username.message}</div>
                             </div>
                             <div>
                                 <FormInput
                                     {...formData.password}
-                                    className="dsc-form-control"
+                                    className="tfr-form-control"
                                     onTurnDirty={handleTurnDirty}
                                     onChange={handleInputChange}
                                 />
@@ -93,13 +93,13 @@ export default function Login() {
 
                         {
                             submitResponseFail &&
-                            <div className="dsc-form-global-error">
+                            <div className="tfr-form-global-error">
                                 Utilizador ou senha inválidos
                             </div>
                         }
 
-                        <div className="dsc-login-form-buttons dsc-mt20">
-                            <button type="submit" className="dsc-btn dsc-btn-blue">Entrar</button>
+                        <div className="tfr-login-form-buttons tfr-mt20">
+                            <button type="submit" className="tfr-btn tfr-btn-blue">Entrar</button>
                         </div>
                     </form>
                 </div>

@@ -1,4 +1,4 @@
-.dsc-catalog-card-top {
+.tfr-catalog-card-top {
   display: flex;
   justify-content: center;
   padding: 25px 10px 10px 10px; /* Adicionado mais espaço no topo */
@@ -6,31 +6,31 @@
 }
 
 /* Novo estilo para o ID/Ano */
-.dsc-catalog-card-id {
+.tfr-catalog-card-id {
     position: absolute;
     top: 8px;
     left: 10px;
     font-size: 12px;
     font-weight: 700;
-    color: var(--dsc-color-font-primary);
+    color: var(--tfr-color-font-primary);
 }
 
-.dsc-catalog-card-top img {
+.tfr-catalog-card-top img {
   width: 150px;
   height: 150px;
 }
 
-.dsc-catalog-card-bottom {
+.tfr-catalog-card-bottom {
   padding: 10px 20px;
   min-height: 130px;
 }
 
-.dsc-catalog-card-bottom h3 {
-  color: var(--dsc-color-font-secondary);
+.tfr-catalog-card-bottom h3 {
+  color: var(--tfr-color-font-secondary);
   font-size: 20px;
 }
 
-.dsc-catalog-card-bottom h4 {
-  color: var(--dsc-color-font-primary);
+.tfr-catalog-card-bottom h4 {
+  color: var(--tfr-color-font-primary);
   font-size: 12px;
 }

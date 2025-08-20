@@ -694,7 +694,7 @@ esbuild-linux-riscv64@0.15.10:
 esbuild-linux-s390x@0.15.10:
   version "0.15.10"
   resolved "https://registry.yarnpkg.com/esbuild-linux-s390x/-/esbuild-linux-s390x-0.15.10.tgz#21fdf0cb3494a7fb520a71934e4dffce67fe47be"
-  integrity sha512-ReP+6q3eLVVP2lpRrvl5EodKX7EZ1bS1/z5j6hsluAlZP5aHhk6ghT6Cq3IANvvDdscMMCB4QEbI+AjtvoOFpA==
+  integrity sha512-ReP+6q3eLVVP2lpRrvl5EodKX7EZ1bS1/z5j6hsluAlZP5aHhk6ghT6Cq3IANvvDtfrMMCB4QEbI+AjtvoOFpA==
 
 esbuild-netbsd-64@0.15.10:
   version "0.15.10"

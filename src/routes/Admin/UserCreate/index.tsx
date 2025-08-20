@@ -76,40 +76,40 @@ export default function UserCreate() {
 
     return (
         <main>
-            <section id="user-create-section" className="dsc-container">
-                <div className="dsc-form-container">
-                    <form className="dsc-card dsc-form" onSubmit={handleSubmit}>
+            <section id="user-create-section" className="tfr-container">
+                <div className="tfr-form-container">
+                    <form className="tfr-card tfr-form" onSubmit={handleSubmit}>
                         <h2>Novo Utilizador</h2>
                        
-                        <div className="dsc-form-controls-container">
+                        <div className="tfr-form-controls-container">
                             <div>
-                                <FormInput {...formData.name} className="dsc-form-control" onChange={handleInputChange} onTurnDirty={handleTurnDirty} />
-                                <div className="dsc-form-error">{formData.name.message}</div>
+                                <FormInput {...formData.name} className="tfr-form-control" onChange={handleInputChange} onTurnDirty={handleTurnDirty} />
+                                <div className="tfr-form-error">{formData.name.message}</div>
                             </div>
                             <div>
-                                <FormInput {...formData.email} className="dsc-form-control" onChange={handleInputChange} onTurnDirty={handleTurnDirty} />
-                                <div className="dsc-form-error">{formData.email.message}</div>
+                                <FormInput {...formData.email} className="tfr-form-control" onChange={handleInputChange} onTurnDirty={handleTurnDirty} />
+                                <div className="tfr-form-error">{formData.email.message}</div>
                             </div>
                             <div>
-                                <FormInput {...formData.password} className="dsc-form-control" onChange={handleInputChange} onTurnDirty={handleTurnDirty} />
-                                <div className="dsc-form-error">{formData.password.message}</div>
+                                <FormInput {...formData.password} className="tfr-form-control" onChange={handleInputChange} onTurnDirty={handleTurnDirty} />
+                                <div className="tfr-form-error">{formData.password.message}</div>
                             </div>
                             <div>
-                                <FormInput {...formData.birthDate} className="dsc-form-control" onChange={handleInputChange} onTurnDirty={handleTurnDirty} />
+                                <FormInput {...formData.birthDate} className="tfr-form-control" onChange={handleInputChange} onTurnDirty={handleTurnDirty} />
                             </div>
                             <div>
-                                <FormInput {...formData.porNumber} className="dsc-form-control" onChange={handleInputChange} onTurnDirty={handleTurnDirty} />
+                                <FormInput {...formData.porNumber} className="tfr-form-control" onChange={handleInputChange} onTurnDirty={handleTurnDirty} />
                             </div>
-                            <select {...formData.role} className="dsc-form-control" onChange={handleInputChange}>
+                            <select {...formData.role} className="tfr-form-control" onChange={handleInputChange}>
                                 <option value="ROLE_VIGILANTE">Vigilante</option>
                                 <option value="ROLE_ADMIN">Admin</option>
                             </select>
                         </div>
-                        <div className="dsc-form-buttons">
+                        <div className="tfr-form-buttons">
                             <Link to="/admin/users">
-                                <button type="reset" className="dsc-btn dsc-btn-white">Cancelar</button>
+                                <button type="reset" className="tfr-btn tfr-btn-white">Cancelar</button>
                             </Link>
-                            <button type="submit" className="dsc-btn dsc-btn-blue">Salvar</button>
+                            <button type="submit" className="tfr-btn tfr-btn-blue">Salvar</button>
                         </div>
                     </form>
                 </div>

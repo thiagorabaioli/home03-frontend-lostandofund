@@ -7,9 +7,9 @@ export default function Footer() {
    
 
     return (
-        <footer className="dsc-footer">
-            <div className="dsc-container">
-                <div className="dsc-footer-content">
+        <footer className="tfr-footer">
+            <div className="tfr-container">
+                <div className="tfr-footer-content">
                     <p>Projeto criado por Thiago Rabaioli</p>
                     <p>contact: tfrabaioli@gmail.com</p>
                     <p>© {new Date().getFullYear()} Lost and Found WEB APP</p>

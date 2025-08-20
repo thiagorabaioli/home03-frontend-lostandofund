@@ -17,11 +17,11 @@ const checkboxStyle = {
 const checkboxLabelStyle = {
     marginLeft: '10px',
     fontSize: '12px',
-    color: 'var(--dsc-color-font-primary)'
+    color: 'var(--tfr-color-font-primary)'
 };
 
 const checkboxErrorStyle = {
-    color: 'var(--dsc-color-error)',
+    color: 'var(--tfr-color-error)',
     fontSize: '12px',
     paddingLeft: '4px',
 };
@@ -108,38 +108,38 @@ export default function DeliverForm() {
 
     return (
         <main>
-            <section id="deliver-form-section" className="dsc-container">
-                <div className="dsc-deliver-form-container">
-                    <form className="dsc-card dsc-form" onSubmit={handleSubmit}>
+            <section id="deliver-form-section" className="tfr-container">
+                <div className="tfr-deliver-form-container">
+                    <form className="tfr-card tfr-form" onSubmit={handleSubmit}>
                         <h2>Entrega do item: {item?.description}</h2>
-                        <div className="dsc-form-controls-container">
+                        <div className="tfr-form-controls-container">
                          
                             <div>
                                 <FormInput
-                                    {...formData.name} className="dsc-form-control"
+                                    {...formData.name} className="tfr-form-control"
                                     onChange={handleInputChange} onTurnDirty={handleTurnDirty}
                                 />
-                                <div className="dsc-form-error">{formData.name.message}</div>
+                                <div className="tfr-form-error">{formData.name.message}</div>
                             </div>
                             <div>
                                 <FormInput
-                                    {...formData.email} className="dsc-form-control"
+                                    {...formData.email} className="tfr-form-control"
                                     onChange={handleInputChange} onTurnDirty={handleTurnDirty}
                                 />
-                                <div className="dsc-form-error">{formData.email.message}</div>
+                                <div className="tfr-form-error">{formData.email.message}</div>
                             </div>
                             <div>
                                 <FormInput 
-                                    {...formData.contact} className="dsc-form-control"
+                                    {...formData.contact} className="tfr-form-control"
                                     onChange={handleInputChange} onTurnDirty={handleTurnDirty}
                                 />
                             </div>
                             <div>
                                 <FormInput 
-                                    {...formData.location} className="dsc-form-control"
+                                    {...formData.location} className="tfr-form-control"
                                     onChange={handleInputChange} onTurnDirty={handleTurnDirty}
                                 />
-                                <div className="dsc-form-error">{formData.location.message}</div>
+                                <div className="tfr-form-error">{formData.location.message}</div>
                             </div>
                             <div style={checkboxStyle}>
                                 <FormInput
@@ -156,12 +156,12 @@ export default function DeliverForm() {
                             )}
 
                         </div>
-                        <div className="dsc-deliver-form-buttons">
+                        <div className="tfr-deliver-form-buttons">
                             <Link to="/client">
-                                <button type="reset" className="dsc-btn dsc-btn-white">Cancelar</button>
+                                <button type="reset" className="tfr-btn tfr-btn-white">Cancelar</button>
                             </Link>
                             
-                            <button type="submit" className="dsc-btn dsc-btn-blue" disabled={isLoading}>
+                            <button type="submit" className="tfr-btn tfr-btn-blue" disabled={isLoading}>
                                 {isLoading ? "A confirmar..." : "Confirmar Entrega"}
                             </button>
                         </div>

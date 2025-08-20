@@ -55,12 +55,12 @@ function BatchDeliverModal({ onClose, onSubmit, selectedItems }: BatchModalProps
     };
 
     return (
-        <div className="dsc-dialog-background" onClick={onClose}>
-            <div className="dsc-dialog-box" style={{maxWidth: '600px'}} onClick={(e) => e.stopPropagation()}>
+        <div className="tfr-dialog-background" onClick={onClose}>
+            <div className="tfr-dialog-box" style={{maxWidth: '600px'}} onClick={(e) => e.stopPropagation()}>
                 <form onSubmit={handleSubmit}>
                     <h2>ENTREGA DE ITENS EM LOTE</h2>
-                    <div className="dsc-form-controls-container dsc-mt20 dsc-mb20">
-                        <select name="centerName" value={formData.centerName} onChange={handleInputChange} className="dsc-form-control">
+                    <div className="tfr-form-controls-container tfr-mt20 tfr-mb20">
+                        <select name="centerName" value={formData.centerName} onChange={handleInputChange} className="tfr-form-control">
                             <option value="PSP">PSP</option>
                             <option value="GNR">GNR</option>
                             <option value="Centro Comercial">Centro Comercial</option>
@@ -71,7 +71,7 @@ function BatchDeliverModal({ onClose, onSubmit, selectedItems }: BatchModalProps
                                 name="otherCenterName"
                                 value={formData.otherCenterName}
                                 onChange={handleInputChange}
-                                className="dsc-form-control"
+                                className="tfr-form-control"
                                 type="text"
                                 placeholder="Especifique o centro de recolha"
                             />
@@ -80,14 +80,14 @@ function BatchDeliverModal({ onClose, onSubmit, selectedItems }: BatchModalProps
                             name="deliveryDate"
                             value={formData.deliveryDate}
                             onChange={handleInputChange}
-                            className="dsc-form-control"
+                            className="tfr-form-control"
                             type="date"
                         />
-                        <div className="dsc-public-list-container" style={{maxHeight: '150px', overflowY: 'auto'}}>
+                        <div className="tfr-public-list-container" style={{maxHeight: '150px', overflowY: 'auto'}}>
                             <p>Itens a serem entregues:</p>
                             {selectedItems.map(item => (
-                                <div key={item.id} className="dsc-public-list-item">
-                                    <p className="dsc-public-item-desc">ID {item.id}: {item.description}</p>
+                                <div key={item.id} className="tfr-public-list-item">
+                                    <p className="tfr-public-item-desc">ID {item.id}: {item.description}</p>
                                 </div>
                             ))}
                         </div>
@@ -104,9 +104,9 @@ function BatchDeliverModal({ onClose, onSubmit, selectedItems }: BatchModalProps
                             </label>
                         </div>
                     </div>
-                    <div className="dsc-dialog-btn-container">
-                        <button type="button" onClick={onClose} className="dsc-btn dsc-btn-white">Cancelar</button>
-                        <button type="submit" className="dsc-btn dsc-btn-blue" disabled={isSubmitting}>
+                    <div className="tfr-dialog-btn-container">
+                        <button type="button" onClick={onClose} className="tfr-btn tfr-btn-white">Cancelar</button>
+                        <button type="submit" className="tfr-btn tfr-btn-blue" disabled={isSubmitting}>
                             {isSubmitting ? "A Entregar..." : "Confirmar Entrega"}
                         </button>
                     </div>
@@ -177,26 +177,26 @@ export default function ItemlostListing() {
 
     return (
         <main>
-            <section id="product-listing-section" className="dsc-container">
-                <h2 className="dsc-section-title dsc-mb20">Itens Perdidos</h2>
-                <div className="dsc-btn-page-container dsc-mb20" style={{ display: 'flex', gap: '20px', width: '100%', maxWidth: '460px' }}>
+            <section id="product-listing-section" className="tfr-container">
+                <h2 className="tfr-section-title tfr-mb20">Itens Perdidos</h2>
+                <div className="tfr-btn-page-container tfr-mb20" style={{ display: 'flex', gap: '20px', width: '100%', maxWidth: '460px' }}>
                     <div onClick={handleNewProductClick}><ButtonInverse text="Novo Item" /></div>
                     {selectedIds.length > 0 && (
                         <div onClick={() => setIsBatchModalVisible(true)}>
-                            <button className="dsc-btn dsc-btn-blue">Entregar em Lote ({selectedIds.length})</button>
+                            <button className="tfr-btn tfr-btn-blue">Entregar em Lote ({selectedIds.length})</button>
                         </div>
                     )}
                 </div>
                 <SearchBar onSearch={handleSearch} />
-                <table className="dsc-table dsc-mb20 dsc-mt20">
+                <table className="tfr-table tfr-mb20 tfr-mt20">
                     <thead>
                         <tr>
                             <th>Sel.</th>
-                            <th className="dsc-tb576">ID</th>
+                            <th className="tfr-tb576">ID</th>
                             <th></th>
-                            <th className="dsc-txt-left">Descrição</th>
-                            <th className="dsc-tb768">Data</th>
-                            <th className="dsc-tb768">Status</th>
+                            <th className="tfr-txt-left">Descrição</th>
+                            <th className="tfr-tb768">Data</th>
+                            <th className="tfr-tb768">Status</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -207,13 +207,13 @@ export default function ItemlostListing() {
                                 <td>
                                     {item.status && <input type="checkbox" checked={selectedIds.includes(item.id)} onChange={() => handleSelectItem(item.id)} />}
                                 </td>
-                                <td className="dsc-tb576">{item.id}</td>
-                                <td><img className="dsc-product-listing-image" src={item.imgUrl} alt={item.description} /></td>
-                                <td className="dsc-txt-left">{item.description}</td>
-                                <td className="dsc-tb768">{new Date(item.foundDate).toLocaleDateString()}</td>
-                                <td className="dsc-tb768">{item.status ? "Perdido" : "Entregue"}</td>
-                                <td>{item.status && <div onClick={() => handleDeliverClick(item.id)} className="dsc-product-listing-btn">Entregar</div>}</td>
-                                <td><img onClick={() => handleUpdateClick(item.id)} className="dsc-product-listing-btn" src={editIcon} alt="Editar" /></td>
+                                <td className="tfr-tb576">{item.id}</td>
+                                <td><img className="tfr-product-listing-image" src={item.imgUrl} alt={item.description} /></td>
+                                <td className="tfr-txt-left">{item.description}</td>
+                                <td className="tfr-tb768">{new Date(item.foundDate).toLocaleDateString()}</td>
+                                <td className="tfr-tb768">{item.status ? "Perdido" : "Entregue"}</td>
+                                <td>{item.status && <div onClick={() => handleDeliverClick(item.id)} className="tfr-product-listing-btn">Entregar</div>}</td>
+                                <td><img onClick={() => handleUpdateClick(item.id)} className="tfr-product-listing-btn" src={editIcon} alt="Editar" /></td>
                             </tr>
                         ))}
                     </tbody>

@@ -1,9 +1,9 @@
-.dsc-header-admin {
-  background-color: var(--dsc-color-bg-quaternary);
-  color: var(--dsc-color-font-tertiary);
+.tfr-header-admin {
+  background-color: var(--tfr-color-bg-quaternary);
+  color: var(--tfr-color-font-tertiary);
 }
 
-.dsc-logo {
+.tfr-logo {
     margin-right: 10px;
     width: 30px; 
     height: 30px; 

@@ -24,7 +24,7 @@ export default function SearchBar({ onSearch }: Props) {
     }
 
     return (
-        <form className="dsc-search-bar" onSubmit={handleSubmit}>
+        <form className="tfr-search-bar" onSubmit={handleSubmit}>
             <button type="submit">🔎︎</button>
             <input 
                 value={text}

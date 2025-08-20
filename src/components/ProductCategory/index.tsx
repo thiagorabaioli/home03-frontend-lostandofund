@@ -6,7 +6,7 @@ type Props = {
 
 export default function ProductCategory({ name }: Props) {
     return (
-        <div className="dsc-category">
+        <div className="tfr-category">
             {name}
         </div>
     );

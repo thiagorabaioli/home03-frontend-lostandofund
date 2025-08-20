@@ -1,13 +1,13 @@
-.dsc-category {
+.tfr-category {
   padding: 0 20px;
   margin-right: 20px;
   margin-bottom: 10px;
-  background-color: var(--dsc-color-bg-tertiary);
+  background-color: var(--tfr-color-bg-tertiary);
   border-radius: 4px;
   height: 30px;
   font-size: 12px;
   font-weight: 700;
-  color: var(--dsc-color-font-tertiary);
+  color: var(--tfr-color-font-tertiary);
   display: flex;
   justify-content: center;
   align-items: center;

@@ -12,10 +12,10 @@ type Props = {
 export default function DialogConfirmation({ id, message, onDialogAnswer }: Props) {
 
     return (
-        <div className="dsc-dialog-background" onClick={() => onDialogAnswer(false, id)}>
-            <div className="dsc-dialog-box" onClick={(event) => event.stopPropagation() }>
+        <div className="tfr-dialog-background" onClick={() => onDialogAnswer(false, id)}>
+            <div className="tfr-dialog-box" onClick={(event) => event.stopPropagation() }>
                 <h2>{message}</h2>
-                <div className="dsc-dialog-btn-container">
+                <div className="tfr-dialog-btn-container">
                     <div onClick={() => onDialogAnswer(false, id)}>
                         <ButtonInverse text="Não" />
                     </div>

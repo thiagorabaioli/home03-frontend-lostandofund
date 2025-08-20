@@ -6,7 +6,7 @@ type Props = {
 
 export default function ButtonPrimary({ text }: Props) {
     return (
-        <div className="dsc-btn dsc-btn-blue">
+        <div className="tfr-btn tfr-btn-blue">
             {text}
         </div>
     );

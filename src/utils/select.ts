@@ -10,11 +10,11 @@ export const selectStyles = {
   }),
   placeholder: (provided: any) => ({
     ...provided,
-    color: "var(--dsc-color-font-placeholder)",
+    color: "var(--tfr-color-font-placeholder)",
   }),
   option: (provided: any) => ({
     ...provided,
-    color: "var(--dsc-color-font-primary)",
+    color: "var(--tfr-color-font-primary)",
   }),
   indicatorSeparator: (provided: any) => ({
     ...provided,

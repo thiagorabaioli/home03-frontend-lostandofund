@@ -96,25 +96,25 @@ export default function ItemLostForm() {
 
     return (
         <main>
-            <section id="itemlost-form-section" className="dsc-container">
-                <div className="dsc-itemlost-form-container">
-                    <form className="dsc-card dsc-form" onSubmit={handleSubmit}>
+            <section id="itemlost-form-section" className="tfr-container">
+                <div className="tfr-itemlost-form-container">
+                    <form className="tfr-card tfr-form" onSubmit={handleSubmit}>
                         <h2>Dados do Item Perdido</h2>
-                        <div className="dsc-form-controls-container">
+                        <div className="tfr-form-controls-container">
                             {/* ... (campos description, location, etc. continuam aqui) ... */}
                              <div>
                                 <FormInput
                                     {...formData.description}
-                                    className="dsc-form-control"
+                                    className="tfr-form-control"
                                     onTurnDirty={handleTurnDirty}
                                     onChange={handleInputChange}
                                 />
-                                <div className="dsc-form-error">{formData.description.message}</div>
+                                <div className="tfr-form-error">{formData.description.message}</div>
                             </div>
                             <div>
                                 <FormInput
                                     {...formData.location}
-                                    className="dsc-form-control"
+                                    className="tfr-form-control"
                                     onTurnDirty={handleTurnDirty}
                                     onChange={handleInputChange}
                                 />
@@ -122,7 +122,7 @@ export default function ItemLostForm() {
                              <div>
                                 <FormInput
                                     {...formData.whoFind}
-                                    className="dsc-form-control"
+                                    className="tfr-form-control"
                                     onTurnDirty={handleTurnDirty}
                                     onChange={handleInputChange}
                                 />
@@ -130,34 +130,34 @@ export default function ItemLostForm() {
                             <div>
                                 <FormInput
                                     {...formData.foundDate}
-                                    className="dsc-form-control"
+                                    className="tfr-form-control"
                                     onTurnDirty={handleTurnDirty}
                                     onChange={handleInputChange}
                                 />
-                                <div className="dsc-form-error">{formData.foundDate.message}</div>
+                                <div className="tfr-form-error">{formData.foundDate.message}</div>
                             </div>
 
                             <div>
-                                <label htmlFor="file-upload" className="dsc-btn dsc-btn-white">
+                                <label htmlFor="file-upload" className="tfr-btn tfr-btn-white">
                                     Selecionar Imagem
                                 </label>
                                 <input id="file-upload" type="file" accept="image/*" onChange={handleFileChange} style={{ display: 'none' }}/>
-                                {selectedFile && <p className="dsc-upload-feedback">Ficheiro selecionado: {selectedFile.name}</p>}
+                                {selectedFile && <p className="tfr-upload-feedback">Ficheiro selecionado: {selectedFile.name}</p>}
                             </div>
 
                             <div>
                                 <FormInput
                                     {...formData.imgUrl}
-                                    className="dsc-form-control"
+                                    className="tfr-form-control"
                                     onChange={handleInputChange}
                                 />
                             </div>
                         </div>
-                        <div className="dsc-itemlost-form-buttons">
+                        <div className="tfr-itemlost-form-buttons">
                             <Link to="/admin/itemlosts">
-                                <button type="reset" className="dsc-btn dsc-btn-white">Cancelar</button>
+                                <button type="reset" className="tfr-btn tfr-btn-white">Cancelar</button>
                             </Link>
-                            <button type="submit" className="dsc-btn dsc-btn-blue">Salvar</button>
+                            <button type="submit" className="tfr-btn tfr-btn-blue">Salvar</button>
                         </div>
                     </form>
                 </div>

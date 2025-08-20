@@ -1,5 +1,5 @@
-.dsc-btn-white {
-  border: 1px solid var(--dsc-color-btn-primary);
-  background-color: var(--dsc-color-btn-inverse);
-  color: var(--dsc-color-btn-primary);
+.tfr-btn-white {
+  border: 1px solid var(--tfr-color-btn-primary);
+  background-color: var(--tfr-color-btn-inverse);
+  color: var(--tfr-color-btn-primary);
 }

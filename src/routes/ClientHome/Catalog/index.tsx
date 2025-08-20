@@ -42,10 +42,10 @@ export default function Catalog() {
 
     return (
         <main>
-            <section id="catalog-section" className="dsc-container">
+            <section id="catalog-section" className="tfr-container">
                 <SearchBar onSearch={handleSearch} />
 
-                <div className="dsc-catalog-cards dsc-mb20 dsc-mt20">
+                <div className="tfr-catalog-cards tfr-mb20 tfr-mt20">
                     {
                         itemlosts.map(
                             item => <CatalogCard key={item.id} itemlost={item} />

@@ -9,19 +9,19 @@ import logo from '../../assets/logo.svg';
 export default function HeaderAdmin() {
 
     return (
-        <header className="dsc-header-admin">
-            <nav className="dsc-container">
-                <div className="dsc-logo-container">
-                    <img src={logo} alt="Logo" className="dsc-logo" />
+        <header className="tfr-header-admin">
+            <nav className="tfr-container">
+                <div className="tfr-logo-container">
+                    <img src={logo} alt="Logo" className="tfr-logo" />
                     <h1>Lost and Found APP - Admin</h1>
                 </div>
-                <div className="dsc-navbar-right">
-                    <div className="dsc-menu-items-container">
+                <div className="tfr-navbar-right">
+                    <div className="tfr-menu-items-container">
                         <NavLink 
                             to="/client"
-                            className={({isActive}) => isActive ? "dsc-menu-item-active" : ""}
+                            className={({isActive}) => isActive ? "tfr-menu-item-active" : ""}
                         >
-                            <div className="dsc-menu-item">
+                            <div className="tfr-menu-item">
                                 <img src={homeIcon} alt="Início" />
                                 <p>Início</p>
                             </div>
@@ -30,9 +30,9 @@ export default function HeaderAdmin() {
                       
                         <NavLink 
                             to="/admin/users"
-                            className={({isActive}) => isActive ? "dsc-menu-item-active" : ""}
+                            className={({isActive}) => isActive ? "tfr-menu-item-active" : ""}
                         >
-                            <div className="dsc-menu-item">
+                            <div className="tfr-menu-item">
                                 <img src={userIcon} alt="Utilizadores" />
                                 <p>Utilizadores</p>
                             </div>
@@ -41,9 +41,9 @@ export default function HeaderAdmin() {
                        
                         <NavLink 
                             to="/client"
-                            className={({isActive}) => isActive ? "dsc-menu-item-active" : ""}
+                            className={({isActive}) => isActive ? "tfr-menu-item-active" : ""}
                         >
-                            <div className="dsc-menu-item">
+                            <div className="tfr-menu-item">
                                 <img src={productsIcon} alt="Itens Perdidos" />
                                 <p>Itens</p>
                             </div>

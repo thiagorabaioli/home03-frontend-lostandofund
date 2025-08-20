@@ -6,7 +6,7 @@ type Props = {
 
 export default function ButtonInverse({ text }: Props) {
     return (
-        <div className="dsc-btn dsc-btn-white">
+        <div className="tfr-btn tfr-btn-white">
             {text}
         </div>
     );

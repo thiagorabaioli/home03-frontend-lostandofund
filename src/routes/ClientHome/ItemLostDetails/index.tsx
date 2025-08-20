@@ -33,16 +33,16 @@ export default function ItemLostDetails() {
 
   return (
     <main>
-      <section id="product-details-section" className="dsc-container">
+      <section id="product-details-section" className="tfr-container">
         {
           itemlost &&
           <ItemLostDetailsCard itemlost={itemlost} />
         }
-        <div className="dsc-btn-page-container">
+        <div className="tfr-btn-page-container">
           {
             contextTokenPayload && authService.hasAnyRoles(['ROLE_ADMIN', 'ROLE_VIGILANTE']) && itemlost?.status &&
             <div onClick={handleDeliverClick}>
-              <div className="dsc-btn dsc-btn-blue">Entregar item</div>
+              <div className="tfr-btn tfr-btn-blue">Entregar item</div>
             </div>
           }
           <Link to="/">
