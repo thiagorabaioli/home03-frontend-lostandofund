@@ -20,7 +20,7 @@ export default function HeaderClient() {
             <nav className="tfr-container">
                 <Link to="/" className="tfr-logo-container">
                     <img src={logo} alt="Logo" className="tfr-logo" />
-                    <h1>Lost and Found WEB APP</h1>
+                    <h1>Perdidos e Achados </h1>
                 </Link>
                 <div className="tfr-navbar-right">
                     <div className="tfr-menu-items-container">

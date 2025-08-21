@@ -13,7 +13,7 @@ export default function HeaderAdmin() {
             <nav className="tfr-container">
                 <div className="tfr-logo-container">
                     <img src={logo} alt="Logo" className="tfr-logo" />
-                    <h1>Lost and Found APP - Admin</h1>
+                    <h1>Perdidos e Achandos  - Admin</h1>
                 </div>
                 <div className="tfr-navbar-right">
                     <div className="tfr-menu-items-container">
