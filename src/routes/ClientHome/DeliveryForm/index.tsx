@@ -6,7 +6,8 @@ import * as forms from '../../../utils/forms';
 import * as itemlostService from '../../../services/itemlost-service';
 import { ItemLostDTO } from '../../../models/itemlosts';
 
-// Estilo para a checkbox e o seu texto
+// --- Estilos para os componentes do formulário ---
+
 const checkboxStyle = {
     display: 'flex',
     alignItems: 'center',
@@ -24,8 +25,30 @@ const checkboxErrorStyle = {
     color: 'var(--tfr-color-error)',
     fontSize: '12px',
     paddingLeft: '4px',
+    marginTop: '5px'
 };
 
+const radioQuestionStyle = {
+    fontSize: '16px',
+    color: 'var(--tfr-color-font-primary)',
+    marginBottom: '10px',
+    marginTop: '10px'
+};
+
+const radioGroupStyle = {
+    display: 'flex',
+    gap: '20px'
+};
+
+const radioLabelStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '5px',
+    fontSize: '14px',
+    color: 'var(--tfr-color-font-primary)'
+};
+
+// --- Componente Principal ---
 
 export default function DeliverForm() {
 
@@ -33,8 +56,6 @@ export default function DeliverForm() {
     const navigate = useNavigate();
 
     const [item, setItem] = useState<ItemLostDTO>();
-    
-    // 1. Adicionar o estado de carregamento
     const [isLoading, setIsLoading] = useState(false);
 
     const [formData, setFormData] = useState<any>({
@@ -60,6 +81,12 @@ export default function DeliverForm() {
             value: false, id: "conditionAccepted", name: "conditionAccepted", type: "checkbox",
             validation: (value: boolean) => value === true,
             message: "É necessário aceitar as condições"
+        },
+        // MUDANÇA: O valor inicial agora é 'null' para garantir que uma opção seja selecionada
+        sameCondition: {
+            value: null, id: "sameCondition", name: "sameCondition", type: "radio",
+            validation: (value: boolean | null) => value !== null,
+            message: "Por favor, selecione Sim ou Não"
         }
     });
 
@@ -72,7 +99,17 @@ export default function DeliverForm() {
 
     function handleInputChange(event: any) {
         const { name, value, type, checked } = event.target;
-        const newValue = type === 'checkbox' ? checked : value;
+        
+        let newValue;
+        if (type === 'checkbox') {
+            newValue = checked;
+        } else if (type === 'radio') {
+            // Radio buttons retornam 'value' como string "true" ou "false"
+            newValue = value === 'true';
+        } else {
+            newValue = value;
+        }
+        
         setFormData(forms.updateAndValidate(formData, name, newValue));
     }
 
@@ -89,7 +126,6 @@ export default function DeliverForm() {
             return;
         }
 
-        // 2. Ativar o carregamento antes do pedido
         setIsLoading(true); 
 
         const requestBody = forms.toValues(formData);
@@ -101,7 +137,6 @@ export default function DeliverForm() {
                 navigate("/client");
             })
             .finally(() => {
-                // 3. Desativar o carregamento no final do pedido
                 setIsLoading(false); 
             });
     }
@@ -115,46 +150,63 @@ export default function DeliverForm() {
                         <div className="tfr-form-controls-container">
                          
                             <div>
-                                <FormInput
-                                    {...formData.name} className="tfr-form-control"
-                                    onChange={handleInputChange} onTurnDirty={handleTurnDirty}
-                                />
+                                <FormInput {...formData.name} className="tfr-form-control" onChange={handleInputChange} onTurnDirty={handleTurnDirty} />
                                 <div className="tfr-form-error">{formData.name.message}</div>
                             </div>
                             <div>
-                                <FormInput
-                                    {...formData.email} className="tfr-form-control"
-                                    onChange={handleInputChange} onTurnDirty={handleTurnDirty}
-                                />
+                                <FormInput {...formData.email} className="tfr-form-control" onChange={handleInputChange} onTurnDirty={handleTurnDirty} />
                                 <div className="tfr-form-error">{formData.email.message}</div>
                             </div>
                             <div>
-                                <FormInput 
-                                    {...formData.contact} className="tfr-form-control"
-                                    onChange={handleInputChange} onTurnDirty={handleTurnDirty}
-                                />
+                                <FormInput {...formData.contact} className="tfr-form-control" onChange={handleInputChange} onTurnDirty={handleTurnDirty} />
                             </div>
                             <div>
-                                <FormInput 
-                                    {...formData.location} className="tfr-form-control"
-                                    onChange={handleInputChange} onTurnDirty={handleTurnDirty}
-                                />
+                                <FormInput {...formData.location} className="tfr-form-control" onChange={handleInputChange} onTurnDirty={handleTurnDirty} />
                                 <div className="tfr-form-error">{formData.location.message}</div>
                             </div>
+                            <div>
+                                <p style={radioQuestionStyle}>O objeto está nas mesmas condições em que o perdeu?</p>
+                                <div style={radioGroupStyle}>
+                                    <label style={radioLabelStyle}>
+                                        <input
+                                            type="radio"
+                                            name="sameCondition"
+                                            value="true"
+                                            checked={formData.sameCondition.value === true}
+                                            onChange={handleInputChange}
+                                            onBlur={() => handleTurnDirty('sameCondition')}
+                                        />
+                                        Sim
+                                    </label>
+                                    <label style={radioLabelStyle}>
+                                        <input
+                                            type="radio"
+                                            name="sameCondition"
+                                            value="false"
+                                            checked={formData.sameCondition.value === false}
+                                            onChange={handleInputChange}
+                                            onBlur={() => handleTurnDirty('sameCondition')}
+                                        />
+                                        Não
+                                    </label>
+                                </div>
+                                {formData.sameCondition.dirty === 'true' && formData.sameCondition.invalid === 'true' && (
+                                    <div style={checkboxErrorStyle}>{formData.sameCondition.message}</div>
+                                )}
+                            </div>
                             <div style={checkboxStyle}>
-                                <FormInput
-                                    {...formData.conditionAccepted}
-                                    onChange={handleInputChange}
-                                    onTurnDirty={handleTurnDirty}
-                                />
+                                <FormInput {...formData.conditionAccepted} onChange={handleInputChange} onTurnDirty={handleTurnDirty} />
                                 <label htmlFor="conditionAccepted" style={checkboxLabelStyle}>
                                     Confirmo que estou a receber o item nas mesmas condições (ou em condições aceitáveis) em que o perdi.
                                 </label>
                             </div>
-                             {formData.conditionAccepted.dirty === 'true' && formData.conditionAccepted.invalid === 'true' && (
+                            {formData.conditionAccepted.dirty === 'true' && formData.conditionAccepted.invalid === 'true' && (
                                 <div style={checkboxErrorStyle}>{formData.conditionAccepted.message}</div>
                             )}
 
+                          
+                            
+                            
                         </div>
                         <div className="tfr-deliver-form-buttons">
                             <Link to="/client">

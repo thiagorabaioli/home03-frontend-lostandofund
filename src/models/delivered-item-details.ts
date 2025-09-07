@@ -9,5 +9,9 @@ export type DeliveredItemDetailsDTO = {
     deliveredToEmail: string;
     deliveredToContact: string;
     deliveryDate: string;
+    deliveredToLocation: string; 
+    conditionAccepted: boolean;
+    sameCondition: boolean;
+    
     interactions: OrderItemDTO[];
 };

@@ -1,3 +1,14 @@
 #delivered-items-section {
     padding: 20px 0;
 }
+
+#delivered-items-section {
+    padding: 20px 0;
+}
+
+/* --- NOVAS REGRAS DE ESTILO ADICIONADAS --- */
+#delivered-items-section .tfr-table th,
+#delivered-items-section .tfr-table td {
+    padding: 12px 15px; /* Adiciona espaçamento interno */
+    white-space: nowrap; /* Impede que o texto quebre para a linha de baixo */
+}
