@@ -96,10 +96,11 @@ export function deliverItemsInBatchRequest(payload: BatchDeliveryPayload) {
     return requestBackend(config);
 }
 
-// Interface para o novo payload
 export type BatchDeliveryPayload = {
     centerName: string;
     deliveryDate: string;
     termsAccepted: boolean;
     itemIds: number[];
+    receiverName: string;
+    receiverEmail: string;
 }

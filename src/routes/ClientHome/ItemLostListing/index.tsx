@@ -11,7 +11,7 @@ import ButtonInverse from '../../../components/ButtonInverse';
 import { useNavigate } from 'react-router-dom';
 import ButtonPrimary from '../../../components/ButtonPrimary';
 
-// --- Componente para o Modal de Entrega em Lote ---
+// --- Componente para o Modal de Entrega em Lote (ATUALIZADO) ---
 type BatchModalProps = {
     onClose: () => void;
     onSubmit: (payload: BatchDeliveryPayload) => Promise<void>;
@@ -24,6 +24,9 @@ function BatchDeliverModal({ onClose, onSubmit, selectedItems }: BatchModalProps
         otherCenterName: '',
         deliveryDate: new Date().toISOString().split('T')[0],
         termsAccepted: false,
+        receiverName: '',
+        receiverEmail: '',
+        receiverAddress: '' // Novo campo de estado para a morada
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -35,6 +38,8 @@ function BatchDeliverModal({ onClose, onSubmit, selectedItems }: BatchModalProps
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
+        
+        // Validações
         if (!formData.termsAccepted) {
             alert("É necessário confirmar o recebimento dos itens.");
             return;
@@ -44,12 +49,28 @@ function BatchDeliverModal({ onClose, onSubmit, selectedItems }: BatchModalProps
             alert("O nome do centro de recolha deve ter pelo menos 3 caracteres.");
             return;
         }
+        if (formData.receiverName.trim().length < 3) {
+            alert("O nome de quem recebe deve ter pelo menos 3 caracteres.");
+            return;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.receiverEmail)) {
+            alert("Por favor, insira um email válido para quem recebe.");
+            return;
+        }
+        if (formData.receiverAddress.trim().length < 5) {
+            alert("A morada de quem recebe deve ter pelo menos 5 caracteres.");
+            return;
+        }
+
         setIsSubmitting(true);
         await onSubmit({
             centerName: center,
             deliveryDate: formData.deliveryDate,
             termsAccepted: formData.termsAccepted,
             itemIds: selectedItems.map(item => item.id),
+            receiverName: formData.receiverName,
+            receiverEmail: formData.receiverEmail,
+          
         });
         setIsSubmitting(false);
     };
@@ -60,6 +81,7 @@ function BatchDeliverModal({ onClose, onSubmit, selectedItems }: BatchModalProps
                 <form onSubmit={handleSubmit}>
                     <h2>ENTREGA DE ITENS EM LOTE</h2>
                     <div className="tfr-form-controls-container tfr-mt20 tfr-mb20">
+                        {/* --- Select do Centro de Recolha --- */}
                         <select name="centerName" value={formData.centerName} onChange={handleInputChange} className="tfr-form-control">
                             <option value="PSP">PSP</option>
                             <option value="GNR">GNR</option>
@@ -67,22 +89,18 @@ function BatchDeliverModal({ onClose, onSubmit, selectedItems }: BatchModalProps
                             <option value="OUTRO">Outro</option>
                         </select>
                         {formData.centerName === 'OUTRO' && (
-                            <input
-                                name="otherCenterName"
-                                value={formData.otherCenterName}
-                                onChange={handleInputChange}
-                                className="tfr-form-control"
-                                type="text"
-                                placeholder="Especifique o centro de recolha"
-                            />
+                            <input name="otherCenterName" value={formData.otherCenterName} onChange={handleInputChange} className="tfr-form-control" type="text" placeholder="Especifique o centro de recolha" />
                         )}
-                        <input
-                            name="deliveryDate"
-                            value={formData.deliveryDate}
-                            onChange={handleInputChange}
-                            className="tfr-form-control"
-                            type="date"
-                        />
+
+                        {/* --- Campos de quem recebe --- */}
+                        <input name="receiverName" value={formData.receiverName} onChange={handleInputChange} className="tfr-form-control" type="text" placeholder="Nome de quem recebe" />
+                        <input name="receiverEmail" value={formData.receiverEmail} onChange={handleInputChange} className="tfr-form-control" type="email" placeholder="Email de quem recebe" />
+                        <input name="receiverAddress" value={formData.receiverAddress} onChange={handleInputChange} className="tfr-form-control" type="text" placeholder="Morada de quem recebe" />
+
+                        {/* --- Data da entrega --- */}
+                        <input name="deliveryDate" value={formData.deliveryDate} onChange={handleInputChange} className="tfr-form-control" type="date" />
+                        
+                        {/* --- Lista de itens e confirmação --- */}
                         <div className="tfr-public-list-container" style={{maxHeight: '150px', overflowY: 'auto'}}>
                             <p>Itens a serem entregues:</p>
                             {selectedItems.map(item => (
@@ -92,18 +110,13 @@ function BatchDeliverModal({ onClose, onSubmit, selectedItems }: BatchModalProps
                             ))}
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <input
-                                name="termsAccepted"
-                                checked={formData.termsAccepted}
-                                onChange={handleInputChange}
-                                type="checkbox"
-                                id="terms"
-                            />
+                            <input name="termsAccepted" checked={formData.termsAccepted} onChange={handleInputChange} type="checkbox" id="terms" />
                             <label htmlFor="terms" style={{ marginLeft: '10px', fontSize: '12px' }}>
                                 Confirmo o recebimento dos itens listados acima.
                             </label>
                         </div>
                     </div>
+                    {/* --- Botões de ação --- */}
                     <div className="tfr-dialog-btn-container">
                         <button type="button" onClick={onClose} className="tfr-btn tfr-btn-white">Cancelar</button>
                         <button type="submit" className="tfr-btn tfr-btn-blue" disabled={isSubmitting}>
@@ -116,7 +129,8 @@ function BatchDeliverModal({ onClose, onSubmit, selectedItems }: BatchModalProps
     );
 }
 
-// --- Componente principal (ItemlostListing) ---
+
+
 type QueryParams = {
     page: number;
     name: string;
@@ -135,7 +149,6 @@ export default function ItemlostListing() {
         itemLostService.findPageRequest(queryParams.page, queryParams.name, 12, "id,desc")
             .then(response => {
                 const nextPage = response.data.content;
-                // **** AQUI ESTÁ A CORREÇÃO ****
                 setItemLost(prevItems => queryParams.page === 0 ? nextPage : [...prevItems, ...nextPage]);
                 setIsLastPage(response.data.last);
             });
