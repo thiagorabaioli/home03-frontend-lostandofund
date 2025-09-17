@@ -14,6 +14,17 @@ export default function DeliveredItemsListing() {
             });
     }, []);
 
+    // Função auxiliar para formatar a saída do campo sameCondition
+    const formatSameCondition = (value: boolean | null) => {
+        if (value === true) {
+            return 'Sim';
+        }
+        if (value === false) {
+            return 'Não';
+        }
+        return 'NA'; // Retorna 'NA' se o valor for nulo
+    };
+
     return (
         <main>
             <section id="delivered-items-section" className="tfr-container">
@@ -21,7 +32,6 @@ export default function DeliveredItemsListing() {
 
                 <table className="tfr-table tfr-mb20 tfr-mt20">
                     <thead>
-                       
                         <tr>
                             <th>Item (ID)</th>
                             <th className="tfr-txt-left">Descrição</th>
@@ -37,7 +47,6 @@ export default function DeliveredItemsListing() {
                     <tbody>
                         {deliveredItems.map(item => (
                             <tr key={item.itemId}>
-    
                                 <td>{item.itemId}</td>
                                 <td className="tfr-txt-left">{item.description}</td>
                                 <td className="tfr-tb768">{item.deliveredToName}</td>
@@ -46,7 +55,7 @@ export default function DeliveredItemsListing() {
                                 <td className="tfr-tb768">{item.deliveredToLocation}</td>
                                 <td className="tfr-tb768">{new Date(item.deliveryDate).toLocaleDateString()}</td>
                                 <td className="tfr-tb768">{item.conditionAccepted ? 'Sim' : 'Não'}</td>
-                                <td className="tfr-tb768">{item.sameCondition ? 'Sim' : 'Não'}</td>
+                                <td className="tfr-tb768">{formatSameCondition(item.sameCondition)}</td>
                             </tr>
                         ))}
                     </tbody>
