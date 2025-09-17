@@ -11,7 +11,7 @@ export type DeliveredItemDetailsDTO = {
     deliveryDate: string;
     deliveredToLocation: string; 
     conditionAccepted: boolean;
-    sameCondition: boolean;
+    sameCondition: boolean | null;
     
     interactions: OrderItemDTO[];
 };
