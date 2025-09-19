@@ -16,11 +16,11 @@ export default function UserUpdate() {
     });
 
     const [formData, setFormData] = useState<any>({
-        name: { value: "", id: "name", name: "name", type: "text", placeholder: "Nome" /* ...validações */ },
-        email: { value: "", id: "email", name: "email", type: "email", placeholder: "Email" /* ...validações */ },
-        password: { value: "", id: "password", name: "password", type: "password", placeholder: "Senha (deixe em branco para não alterar)" },
-        birthDate: { value: "", id: "birthDate", name: "birthDate", type: "date", placeholder: "Data de Nascimento" },
-        porNumber: { value: "", id: "porNumber", name: "porNumber", type: "text", placeholder: "POR Colaborador" },
+        name: { value: "", id: "name", name: "name", type: "text" /* ...validações */ },
+        email: { value: "", id: "email", name: "email", type: "email" /* ...validações */ },
+        password: { value: "", id: "password", name: "password", type: "password" },
+        birthDate: { value: "", id: "birthDate", name: "birthDate", type: "date" },
+        porNumber: { value: "", id: "porNumber", name: "porNumber", type: "text" },
         role: { value: "ROLE_VIGILANTE", id: "role", name: "role" }
     });
 
@@ -81,22 +81,28 @@ export default function UserUpdate() {
                        
                         <div className="tfr-form-controls-container">
                            <div>
+                                <label className="tfr-form-label" htmlFor="name">Nome:</label>
                                 <FormInput {...formData.name} className="tfr-form-control" onChange={handleInputChange} onTurnDirty={handleTurnDirty} />
                                 <div className="tfr-form-error">{formData.name.message}</div>
                             </div>
                             <div>
+                                <label className="tfr-form-label" htmlFor="email">Email:</label>
                                 <FormInput {...formData.email} className="tfr-form-control" onChange={handleInputChange} onTurnDirty={handleTurnDirty} />
                                 <div className="tfr-form-error">{formData.email.message}</div>
                             </div>
                             <div>
+                                <label className="tfr-form-label" htmlFor="password">Senha (deixe em branco para não alterar):</label>
                                 <FormInput {...formData.password} className="tfr-form-control" onChange={handleInputChange} onTurnDirty={handleTurnDirty} />
                             </div>
                             <div>
+                                <label className="tfr-form-label" htmlFor="birthDate">Data de Nascimento:</label>
                                 <FormInput {...formData.birthDate} className="tfr-form-control" onChange={handleInputChange} onTurnDirty={handleTurnDirty} />
                             </div>
                             <div>
+                                <label className="tfr-form-label" htmlFor="porNumber">POR Colaborador:</label>
                                 <FormInput {...formData.porNumber} className="tfr-form-control" onChange={handleInputChange} onTurnDirty={handleTurnDirty} />
                             </div>
+                            <label className="tfr-form-label" htmlFor="role">Perfil:</label>
                             <select {...formData.role} className="tfr-form-control" onChange={handleInputChange}>
                                 <option value="ROLE_VIGILANTE">Vigilante</option>
                                 <option value="ROLE_ADMIN">Admin</option>
