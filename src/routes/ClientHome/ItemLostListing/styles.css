@@ -14,3 +14,31 @@
   cursor: pointer;
   margin: 5px;
 }
+
+/* Novas classes para o modal de entrega em lote e botões de ação */
+.tfr-batch-deliver-modal-box {
+    width: 90%;
+    max-width: 800px;
+}
+
+.tfr-batch-deliver-list-container {
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.tfr-modal-checkbox-container {
+    display: flex;
+    align-items: center;
+}
+
+.tfr-modal-checkbox-label {
+    margin-left: 10px;
+    font-size: 12px;
+}
+
+.tfr-action-buttons-container {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    max-width: 460px;
+}

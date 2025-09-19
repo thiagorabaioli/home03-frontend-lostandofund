@@ -18,7 +18,7 @@ export default function AdminHome() {
     return (
         <main>
             <section id="admin-home-section" className="tfr-container">
-                <h2 className="tfr-section-title tfr-mb20">Bem-vindo à área administrativa {user?.name}</h2>
+                <h2 className="tfr-section-title tfr-mb20">Bem-vindo à área administrativa Utilizador:  {user?.name}</h2>
             </section>
         </main>
     );

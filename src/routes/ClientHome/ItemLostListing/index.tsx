@@ -77,7 +77,7 @@ function BatchDeliverModal({ onClose, onSubmit, selectedItems }: BatchModalProps
 
     return (
         <div className="tfr-dialog-background" onClick={onClose}>
-            <div className="tfr-dialog-box" style={{maxWidth: '600px'}} onClick={(e) => e.stopPropagation()}>
+            <div className="tfr-dialog-box tfr-batch-deliver-modal-box" onClick={(e) => e.stopPropagation()}>
                 <form onSubmit={handleSubmit}>
                     <h2>ENTREGA DE ITENS EM LOTE</h2>
                     <div className="tfr-form-controls-container tfr-mt20 tfr-mb20">
@@ -93,15 +93,15 @@ function BatchDeliverModal({ onClose, onSubmit, selectedItems }: BatchModalProps
                         )}
 
                         {/* --- Campos de quem recebe --- */}
-                        <input name="receiverName" value={formData.receiverName} onChange={handleInputChange} className="tfr-form-control" type="text" placeholder="Nome de quem recebe" />
-                        <input name="receiverEmail" value={formData.receiverEmail} onChange={handleInputChange} className="tfr-form-control" type="email" placeholder="Email de quem recebe" />
-                        <input name="receiverAddress" value={formData.receiverAddress} onChange={handleInputChange} className="tfr-form-control" type="text" placeholder="Morada de quem recebe" />
+                        <input name="receiverName" value={formData.receiverName} onChange={handleInputChange} className="tfr-form-control" type="text" placeholder="Nome agente da autoridade que recebe os itens" />
+                        <input name="receiverEmail" value={formData.receiverEmail} onChange={handleInputChange} className="tfr-form-control" type="email" placeholder="Email/Contacto Esquadra  " />
+                        <input name="receiverAddress" value={formData.receiverAddress} onChange={handleInputChange} className="tfr-form-control" type="text" placeholder="Morada/Localidade" />
 
                         {/* --- Data da entrega --- */}
                         <input name="deliveryDate" value={formData.deliveryDate} onChange={handleInputChange} className="tfr-form-control" type="date" />
                         
                         {/* --- Lista de itens e confirmação --- */}
-                        <div className="tfr-public-list-container" style={{maxHeight: '150px', overflowY: 'auto'}}>
+                        <div className="tfr-public-list-container tfr-batch-deliver-list-container">
                             <p>Itens a serem entregues:</p>
                             {selectedItems.map(item => (
                                 <div key={item.id} className="tfr-public-list-item">
@@ -109,9 +109,9 @@ function BatchDeliverModal({ onClose, onSubmit, selectedItems }: BatchModalProps
                                 </div>
                             ))}
                         </div>
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <div className="tfr-modal-checkbox-container">
                             <input name="termsAccepted" checked={formData.termsAccepted} onChange={handleInputChange} type="checkbox" id="terms" />
-                            <label htmlFor="terms" style={{ marginLeft: '10px', fontSize: '12px' }}>
+                            <label htmlFor="terms" className="tfr-modal-checkbox-label">
                                 Confirmo o recebimento dos itens listados acima.
                             </label>
                         </div>
@@ -128,8 +128,6 @@ function BatchDeliverModal({ onClose, onSubmit, selectedItems }: BatchModalProps
         </div>
     );
 }
-
-
 
 type QueryParams = {
     page: number;
@@ -192,7 +190,7 @@ export default function ItemlostListing() {
         <main>
             <section id="product-listing-section" className="tfr-container">
                 <h2 className="tfr-section-title tfr-mb20">Itens Perdidos</h2>
-                <div className="tfr-btn-page-container tfr-mb20" style={{ display: 'flex', gap: '20px', width: '100%', maxWidth: '460px' }}>
+                <div className="tfr-btn-page-container tfr-mb20 tfr-action-buttons-container">
                     <div onClick={handleNewProductClick}><ButtonInverse text="Novo Item" /></div>
                     {selectedIds.length > 0 && (
                         <div onClick={() => setIsBatchModalVisible(true)}>
